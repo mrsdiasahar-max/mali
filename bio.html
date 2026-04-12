@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    .currency-symbol{display:inline-block;width:12px;height:12px;vertical-align:middle;margin:0 2px}
+    .aed-symbol{background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADNklEQVR4nO2ZTWhTQRDHf5tYP1pFqYqIBy+CHlREELx4ED148eLJix5E8ODHQRRRQTx48OJBRPDgxYMgHrx48KIHL4KIB0EEQQRR8KMq1g+s1dZ0ZGHZvL7d3bxNmrTQgYG8TGZm/m9md3ZeIJVKpVKpVCqVSqVSqVQqlfofAVYAu4F7wCfgB/AbmJX/M/I+Kp/tBVZSJMAqYBj4DMwBS4F1wHpgLbAGWCbvOe/r5Jr38l0HcBpYTAEAm4HbwDSwCzgBHAYOyHFI3k/I+24Z81vGdgGHgK3ABqAOqJX/m+XYCBwEOoEHwFtJPw+AhUg/A/QBp4AtwEbgEDAJfAN+SR51Rfax4MvDdrlfiihwZ0Yv18Z+FntfgDHgMVAPfBd7r4D6XxI4IukSpWtFbI/J/LqB3TIfxyaR7R0YE/mBGQROy8L5A3RQHAZEngdaBT4C+oCvwGtgE8VhoyQ7B1Y4p4ULp4R+2d6VY0u0y/bfxDZZ4rkw6pwoSrTLeqTYlmFvQMS7gVWy/eektAtLXmxKtBuWaLspAq2yS+aAF0AX0C7H8/+RuJbBdovPg3L9LtBwRmx7KAJNUpY9wExGOT0jKdVJEeiTWWaA545vPy1l90sRaBZ7EcAF4KaTUs0UgXqZZQK4AvRKSvUCVyWlGigCy2WW98B1ScUu4JakVB1FYIXMMg7clZS6LynVQBGol1neAfelomsEHkpKraUIrJJZ3ki1OXEOvJaU2kARWCuz/DfvkxQHl1L/IqV81QYgUm3uAW9lO/Z5yq0xKbW+UKnkqzb3ZWPPA32S6UeAj8AUsJ0isFVmGQXGgVHgCTAB3ADOAq3ABorDTpnpnvx2GgS+iP1nwC6KxF5JdiPaXcBLsT0GtFAk2iShnPMdl7mGga3iJ4pEq/hxbI/Jdt8JvBDfjxFDfAVAC/BIZnwHnAR2AC2yWza57ztl/IQYGpPrO+VvnPfeU7H3COii4ADLxXdcNb8W314z/+8D2r1+nh6xNetlS/X2BxzfdG4C1tJ/rZWbLvw+L+p0bmYLpLkXuClp+FZSeQK4CNwHlpD7foF/1d/MXtZQXe8AAAAASUVORK5CYII=') center/contain no-repeat}
+    .sar-symbol{background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACX0lEQVR4nO2ZS2sUQRDHfzGJH4yPqKhRQTx48OBBRPDgxYMnLx48ePHgwYMHEUHw4MGDB0E8ePEgiB48eBFEPHgRRDx4EEQ8eBBEPKioeNBEJVYUdqFhmO7pnpndzW4WCgqaqd7+/6u6urrWQRAEQRAEQRAEQRAEQRAEwf8MYBewBfgGfAfmgZ/AmvxvTX6fk892AjuoEsAm4BhwE5gFVgObgc3AJmC1fGe/3y2/jctvI8ARYDlVANgKXAfmgD3ACeAwsE+OA/Ldcfltj4wZk7F7gW3ARqBJPjfJsQE4AHQCt4BpYBa4CdSV+k8D/cBJYCuwH7gPfAF+yDxOST4afHkY2C73VSIKjJXpFdvY4eI/U9TnA+AnMCO2xoDaXxLokHSJo3UgtufE3kZgv8zHsUlku3smxHawdcAy2V4BK0raBTiY/UAtybEq64e+SXdgS8rR6dzXZ+u2U3pFv8gzRtkPkb+L7W/AP8Bqv2w/gIcZdmr+y/bH/1Qv1t5n29slDEz2i53NJQA7xH7cF+MrTgitHrQ6x1aLXf1XCvVij9j6iKTkP9me8xX6tdhpkcN5f1bsvQYa/FLI/0y2Z/yy/UJss/4y0Cp2jPkvA3okJU8CR4Ee4EaebB+Vc+6WvtnBbrHdWkC2j0qq3wO6xP9VoFvsHA1gu4WE2+cgcE5S6TLQKqnUAlwqMNujYntfAdnjuNjuLWH75Ny97pZUug6ckZSaKPABnxL7bQVkz5TY7i0h+6dk+ymwLs9u1ChN7xNb15G/z3vSl/v0YaA2e0tZJtCW9TuPe0l+uX9v9uYPgiAIgiAIgiAIgiAIgqAy/AbJP53Csl7VfgAAAABJRU5ErkJggg==') center/contain no-repeat}
     :root{
       --sage:#8FB5A2;--sage-dark:#6d9a85;--sage-light:#d6e4dd;
       --peach:#f5e6d3;--cream:#faf6f0;
@@ -18,36 +21,56 @@
       --white:#ffffff;--shadow:0 2px 12px rgba(44,62,58,.08);
       --r:16px;--rs:12px;
     }
-    html,body{font-family:'Noto Sans Arabic',system-ui,sans-serif;background:linear-gradient(160deg,var(--peach) 0%,#ede8e0 40%,var(--sage-light) 100%);color:var(--text);min-height:100vh;overflow-x:hidden}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans Arabic',system-ui,sans-serif;background:linear-gradient(160deg,var(--peach) 0%,#ede8e0 40%,var(--sage-light) 100%);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-    /* === DECORATIVE BUBBLES === */
+    /* Scroll Progress Bar */
+    .scroll-progress{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(143,181,162,.2);z-index:9999}
+    .scroll-progress-bar{height:100%;background:linear-gradient(90deg,var(--sage),var(--sage-dark));width:0%;transition:width .1s ease}
+
+    /* Floating CTA */
+    .floating-cta{position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--sage),var(--sage-dark));color:var(--white);padding:14px 28px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(143,181,162,.4);z-index:9998;transition:bottom .4s cubic-bezier(.68,-.55,.265,1.55);font-family:'Noto Sans Arabic',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:8px}
+    .floating-cta.show{bottom:20px}
+    .floating-cta:active{transform:translateX(-50%) scale(.95)}
+    .floating-cta .pulse{width:8px;height:8px;background:var(--white);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+
+    /* Scroll Reveal */
+    .scroll-reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+    .scroll-reveal.revealed{opacity:1;transform:translateY(0)}
+
+    /* Enhanced Product Cards */
+    .prod{position:relative;overflow:hidden}
+    .prod::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(143,181,162,.05),transparent);opacity:0;transition:opacity .3s}
+    .prod:hover::before{opacity:1}
+    .prod-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#2ECC71,#27ae60);color:var(--white);padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;opacity:0;transform:scale(.8);transition:all .3s}
+    .prod:hover .prod-badge{opacity:1;transform:scale(1)}
+
+    /* Copy Code Feature */
+    .copy-code{display:inline-flex;align-items:center;gap:6px;background:var(--sage-light);padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;user-select:none;margin-top:6px}
+    .copy-code:active{transform:scale(.95)}
+    .copy-code.copied{background:var(--sage);color:var(--white)}
+
+    /* Confetti */
+    .confetti{position:fixed;width:10px;height:10px;background:var(--sage);pointer-events:none;z-index:10000}
+
+    /* Bubble effects */
     .bubble{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
     .b1{width:200px;height:200px;top:-60px;right:-40px;background:radial-gradient(circle,rgba(143,181,162,.12),transparent 70%)}
     .b2{width:280px;height:280px;bottom:-80px;left:-80px;background:radial-gradient(circle,rgba(245,230,211,.2),transparent 70%)}
     .b3{width:150px;height:150px;top:40%;left:-30px;background:radial-gradient(circle,rgba(143,181,162,.08),transparent 70%)}
 
     .wrap{position:relative;z-index:1;max-width:420px;margin:0 auto;padding:12px 16px 32px}
-
-    /* === HEADER === */
     .hdr{text-align:center;padding:20px 0 24px;animation:fadeIn .6s ease}
     @keyframes fadeIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
     .logo-img{width:220px;height:auto;margin:0 auto 8px;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.1))}
-    .logo-text{font-size:28px;font-weight:800;color:var(--text);margin-bottom:6px;text-shadow:0 3px 8px rgba(0,0,0,.12);line-height:1.2;letter-spacing:-.5px}
     .hdr .tag{font-size:13px;color:var(--sage-dark);font-weight:600;margin-bottom:6px}
     .hdr .desc{font-size:12px;color:var(--text2);line-height:1.5}
-    /* SAR symbol inline */
-    .sar-sym{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin:0 1px}
-    .sar-sym svg{width:100%;height:100%}
-    .aed-sym{display:inline-block;width:16px;height:14px;vertical-align:-2px;margin:0 1px}
-    .aed-sym svg{width:100%;height:100%}
-
-    /* Social row */
     .soc-row{display:flex;justify-content:center;gap:10px;margin-top:14px}
     .soc{width:36px;height:36px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text);box-shadow:var(--shadow);transition:transform .2s}
     .soc svg{width:18px;height:18px;fill:var(--text)}
     .soc:active{transform:scale(.92)}
-
-    /* === TESTIMONIAL CAROUSEL === */
     .testi{background:var(--white);border-radius:var(--r);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);animation:fadeIn .6s ease .2s both;position:relative;min-height:110px}
     .testi-track{position:relative;overflow:hidden}
     .testi-slide{display:none;animation:fadeQuote .5s ease}
@@ -62,25 +85,20 @@
     .testi-dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
     .testi-dot{width:6px;height:6px;border-radius:50%;background:var(--sage-light);transition:background .3s;cursor:pointer}
     .testi-dot.active{background:var(--sage)}
-
-    /* === QUIZ CTA (PRIMARY) === */
-    .quiz-cta{background:linear-gradient(135deg,var(--sage) 0%,var(--sage-dark) 100%);border-radius:var(--r);padding:22px 20px;margin-bottom:24px;text-align:center;color:var(--white);animation:slideUp .6s ease .3s both;position:relative;overflow:hidden}
+    .quiz-cta{background:linear-gradient(135deg,var(--sage) 0%,var(--sage-dark) 100%);border-radius:var(--r);padding:24px 20px;margin-bottom:24px;text-align:center;color:var(--white);animation:slideUp .6s ease .3s both;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(143,181,162,.3)}
     .quiz-cta::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:rgba(255,255,255,.06);border-radius:50%}
     .quiz-cta::after{content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%}
     @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .quiz-cta .q-icon{font-size:36px;margin-bottom:10px;position:relative;z-index:1}
-    .quiz-cta h2{font-size:18px;font-weight:700;margin-bottom:6px;position:relative;z-index:1}
-    .quiz-cta p{font-size:12px;opacity:.9;line-height:1.6;margin-bottom:14px;position:relative;z-index:1}
-    .quiz-cta .q-tag{display:inline-block;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-bottom:10px;position:relative;z-index:1}
-    .quiz-cta .qbtn{display:block;background:var(--white);color:var(--sage-dark);padding:13px;border-radius:var(--rs);font-size:15px;font-weight:700;text-decoration:none;text-align:center;transition:transform .2s;position:relative;z-index:1;font-family:'Noto Sans Arabic',sans-serif}
+    .quiz-cta .q-icon{font-size:40px;margin-bottom:10px;position:relative;z-index:1}
+    .quiz-cta h2{font-size:19px;font-weight:700;margin-bottom:6px;position:relative;z-index:1}
+    .quiz-cta p{font-size:13px;opacity:.95;line-height:1.6;margin-bottom:16px;position:relative;z-index:1}
+    .quiz-cta .q-tag{display:inline-block;background:rgba(255,255,255,.25);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px;position:relative;z-index:1}
+    .quiz-cta .qbtn{display:block;background:var(--white);color:var(--sage-dark);padding:15px;border-radius:var(--rs);font-size:16px;font-weight:700;text-decoration:none;text-align:center;transition:transform .2s;position:relative;z-index:1;font-family:'Noto Sans Arabic',sans-serif;box-shadow:0 0 0 0 rgba(255,255,255,.5);animation:pulseBtn 2.5s ease-in-out infinite}
+    @keyframes pulseBtn{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}50%{box-shadow:0 0 0 12px rgba(255,255,255,0)}}
     .quiz-cta .qbtn:active{transform:scale(.97)}
-    .quiz-cta .qbtn{animation:pulseBtn 2.5s ease-in-out infinite}
-    @keyframes pulseBtn{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.4)}50%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
-    .quiz-cta .q-sub{font-size:10px;opacity:.7;margin-top:8px;position:relative;z-index:1}
-
-    /* === PATH SELECTOR === */
-    .paths{margin-bottom:6px;animation:slideUp .6s ease .4s both}
-    .paths-title{font-size:16px;font-weight:700;text-align:center;margin-bottom:4px;color:var(--text)}
+    .quiz-cta .q-sub{font-size:10px;opacity:.75;margin-top:10px;position:relative;z-index:1}
+    .paths{margin-bottom:20px;animation:slideUp .6s ease .35s both}
+    .paths-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:4px;color:var(--text)}
     .paths-sub{font-size:11px;text-align:center;color:var(--text3);margin-bottom:14px}
     .path-list{display:flex;flex-direction:column;gap:10px}
     .pcard{background:var(--white);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:2px solid transparent;transition:all .25s;box-shadow:var(--shadow);user-select:none;-webkit-user-select:none}
@@ -91,12 +109,9 @@
     .pcard-text p{font-size:11px;color:var(--text2);line-height:1.3}
     .pcard .arrow{margin-right:auto;margin-left:0;font-size:16px;color:var(--text3);transition:transform .25s}
     .pcard.on .arrow{transform:rotate(90deg);color:var(--sage)}
-
-    /* === PRODUCT CARDS (per path) === */
     .prods{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),opacity .3s;opacity:0;margin-bottom:0}
     .prods.on{opacity:1;margin-bottom:20px;max-height:1600px}
     .prods-inner{display:flex;flex-direction:column;gap:10px;padding-top:10px}
-
     .prod{background:var(--white);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--text);display:block;transition:transform .2s}
     .prod:active{transform:translateY(-1px)}
     .prod.hero{border:2px solid var(--sage);background:#f9fcfa}
@@ -112,31 +127,29 @@
     .prod-cta{display:block;background:var(--sage);color:var(--white);text-align:center;padding:10px;border-radius:var(--rs);font-size:13px;font-weight:600;margin-top:10px;transition:background .2s}
     .prod:active .prod-cta{background:var(--sage-dark)}
     .prod-upsell-label{font-size:10px;color:var(--sage-dark);font-weight:600;text-align:center;margin-top:8px;margin-bottom:-2px;letter-spacing:.3px}
-
-    /* === FREE GUIDE (EXIT RAMP) === */
-    .exit-ramp{background:var(--white);border-radius:var(--r);padding:20px;margin-bottom:20px;text-align:center;box-shadow:var(--shadow);border:1px dashed var(--sage);animation:slideUp .6s ease .5s both}
+    .exit-ramp{background:var(--white);border-radius:var(--r);padding:20px;margin-bottom:20px;text-align:center;box-shadow:var(--shadow);border:1px dashed var(--sage);animation:slideUp .6s ease .4s both}
     .exit-ramp .er-icon{font-size:28px;margin-bottom:8px}
     .exit-ramp h3{font-size:15px;font-weight:700;margin-bottom:4px;color:var(--text)}
     .exit-ramp p{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px}
     .exit-ramp .er-tag{display:inline-block;background:#2ECC71;color:var(--white);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-bottom:10px}
     .exit-ramp .cbtn{display:block;background:var(--sage);color:var(--white);padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:transform .2s;font-family:'Noto Sans Arabic',sans-serif}
     .exit-ramp .cbtn:active{transform:scale(.97)}
-
-    /* === COACHING SPOTLIGHT === */
-    .coach{background:linear-gradient(135deg,#faf6f0,var(--white));border:2px solid var(--sage);border-radius:var(--r);padding:20px;margin-bottom:20px;text-align:center;animation:slideUp .6s ease .55s both}
-    .coach-icon{font-size:28px;margin-bottom:8px}
-    .coach h3{font-size:15px;font-weight:700;margin-bottom:4px}
-    .coach .coach-sub{font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.4}
-    .coach .prod-price{justify-content:center;margin-bottom:12px}
-    .coach .cbtn{display:block;background:var(--sage);color:var(--white);padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:transform .2s;font-family:'Noto Sans Arabic',sans-serif}
-    .coach .cbtn:active{transform:scale(.97)}
-
-    /* === COLLAPSIBLE SECTIONS === */
+    .consult-spot{background:linear-gradient(135deg,#faf6f0,var(--white));border:2px solid var(--sage);border-radius:var(--r);padding:20px;margin-bottom:20px;animation:slideUp .6s ease .45s both}
+    .consult-spot h3{font-size:15px;font-weight:700;text-align:center;margin-bottom:4px;color:var(--text)}
+    .consult-spot .cs-sub{font-size:11px;text-align:center;color:var(--text2);margin-bottom:16px;line-height:1.4}
+    .consult-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .consult-card{background:var(--white);border:1px solid var(--sage-light);border-radius:var(--rs);padding:14px;text-align:center;text-decoration:none;color:var(--text);display:block;transition:all .2s}
+    .consult-card:active{transform:translateY(-2px);border-color:var(--sage)}
+    .consult-card .cs-icon{font-size:24px;margin-bottom:6px}
+    .consult-card .cs-name{font-size:13px;font-weight:700;margin-bottom:3px;color:var(--text)}
+    .consult-card .cs-desc{font-size:10px;color:var(--text2);margin-bottom:8px;line-height:1.3}
+    .consult-card .cs-price{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:10px;color:var(--text3);margin-bottom:8px}
+    .consult-card .cs-btn{display:inline-block;background:var(--sage);color:var(--white);padding:7px 16px;border-radius:6px;font-size:11px;font-weight:600;margin-top:4px}
     .csec{margin-bottom:10px;animation:slideUp .6s ease both}
-    .csec:nth-child(1){animation-delay:.6s}
-    .csec:nth-child(2){animation-delay:.65s}
-    .csec:nth-child(3){animation-delay:.7s}
-    .csec:nth-child(4){animation-delay:.75s}
+    .csec:nth-child(1){animation-delay:.5s}
+    .csec:nth-child(2){animation-delay:.55s}
+    .csec:nth-child(3){animation-delay:.6s}
+    .csec:nth-child(4){animation-delay:.65s}
     .chdr{background:var(--white);border-radius:var(--rs);padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px;color:var(--text);box-shadow:var(--shadow);user-select:none;transition:all .2s}
     .chdr:active{transform:translateY(-1px)}
     .chdr.on{color:var(--sage-dark);background:#f9faf8}
@@ -147,122 +160,75 @@
     .ccnt-inner{padding:10px 0;display:flex;flex-direction:column;gap:10px}
     .citem{background:var(--white);border-radius:var(--rs);padding:14px;box-shadow:var(--shadow)}
     .citem-title{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px}
-    .citem-title .tool-logo{width:24px;height:24px;border-radius:6px;flex-shrink:0}
     .citem-desc{font-size:11px;color:var(--text2);margin-bottom:8px;line-height:1.3}
     .citem .cbtn{display:block;background:var(--sage);color:var(--white);padding:9px;border-radius:var(--rs);font-size:12px;font-weight:600;text-decoration:none;text-align:center;margin-top:8px;font-family:'Noto Sans Arabic',sans-serif}
-
-    /* === COMMUNITY === */
-    .community{background:linear-gradient(135deg,#2c3e3a,#3d5550);border-radius:var(--r);padding:20px;margin-bottom:20px;text-align:center;color:var(--white);animation:slideUp .6s ease .58s both;position:relative;overflow:hidden}
+    .community{background:linear-gradient(135deg,#2c3e3a,#3d5550);border-radius:var(--r);padding:20px;margin-bottom:20px;text-align:center;color:var(--white);animation:slideUp .6s ease .7s both;position:relative;overflow:hidden}
     .community::before{content:'';position:absolute;top:-30px;left:-30px;width:120px;height:120px;background:rgba(143,181,162,.1);border-radius:50%}
     .community .cm-icon{font-size:28px;margin-bottom:8px;position:relative;z-index:1}
     .community h3{font-size:15px;font-weight:700;margin-bottom:4px;position:relative;z-index:1}
     .community .cm-sub{font-size:12px;opacity:.85;line-height:1.5;margin-bottom:12px;position:relative;z-index:1}
     .community .cm-tag{display:inline-block;background:rgba(143,181,162,.3);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-bottom:10px;position:relative;z-index:1}
     .community .cbtn{display:block;background:var(--sage);color:var(--white);padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:transform .2s;font-family:'Noto Sans Arabic',sans-serif;position:relative;z-index:1}
-
-    /* === FUNNEL FLOW ARROW === */
     .flow-arrow{text-align:center;color:var(--sage);font-size:20px;margin:4px 0 12px;opacity:.5;animation:bounceDown 2s ease-in-out infinite}
     @keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-
-    /* === SHOP ALL === */
-    .shop{text-align:center;margin:20px 0;animation:slideUp .6s ease .8s both}
+    .shop{text-align:center;margin:20px 0;animation:slideUp .6s ease .75s both}
     .shop a{display:inline-block;color:var(--sage);border:2px solid var(--sage);padding:10px 24px;border-radius:var(--rs);font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;font-family:'Noto Sans Arabic',sans-serif}
     .shop a:active{background:var(--sage);color:var(--white)}
-
-    /* === FUNNEL NUDGE (sticky bottom) === */
-    .funnel-nudge{position:fixed;bottom:0;left:0;right:0;z-index:99;transform:translateY(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:none}
-    .funnel-nudge.show{transform:translateY(0);pointer-events:auto}
-    .funnel-nudge-inner{max-width:420px;margin:0 auto;padding:10px 16px 14px;background:linear-gradient(135deg,var(--sage),var(--sage-dark));display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:var(--r) var(--r) 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.1)}
-    .funnel-nudge .fn-text{color:var(--white);font-size:12px;font-weight:600;line-height:1.3}
-    .funnel-nudge .fn-btn{flex-shrink:0;background:var(--white);color:var(--sage-dark);padding:8px 16px;border-radius:var(--rs);font-size:12px;font-weight:700;text-decoration:none;font-family:'Noto Sans Arabic',sans-serif;white-space:nowrap}
-
-    /* === PROGRESS DOTS === */
     .funnel-progress{display:flex;justify-content:center;gap:6px;margin-bottom:18px}
     .fp-dot{width:8px;height:8px;border-radius:50%;background:var(--sage-light);transition:all .4s}
     .fp-dot.active{background:var(--sage);transform:scale(1.3)}
     .fp-label{text-align:center;font-size:10px;color:var(--text3);margin-top:-12px;margin-bottom:12px;transition:opacity .3s}
-
-    /* === SWIPE HINT === */
-    @keyframes swipeHint{0%,100%{transform:translateX(0)}30%{transform:translateX(-6px)}60%{transform:translateX(6px)}}
-    .swipe-hint{animation:swipeHint 2s ease-in-out 3s 2}
-
-    /* === FOOTER === */
-    .ftr{background:var(--white);border-radius:var(--r);padding:20px;text-align:center;margin-top:8px;box-shadow:var(--shadow);animation:slideUp .6s ease .9s both}
+    .ftr{background:var(--white);border-radius:var(--r);padding:20px;text-align:center;margin-top:8px;box-shadow:var(--shadow);animation:slideUp .6s ease .8s both}
     .ftr .soc-row{margin-bottom:14px;margin-top:0}
     .ftr-links{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
     .ftr-links a{font-size:12px;color:var(--text2);text-decoration:none}
     .ftr-div{height:1px;background:#f0f0f0;margin-bottom:12px}
     .ftr-copy{font-size:10px;color:var(--text3)}
-
-    /* === RESPONSIVE === */
     @media(max-width:360px){
       .wrap{padding:10px 12px 28px}
       .quiz-cta{padding:18px 16px}
       .pcard{padding:12px 14px}
+      .floating-cta{font-size:13px;padding:12px 20px}
     }
-
-    /* === ENHANCED SCROLL ANIMATIONS === */
-    .scroll-in{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
-    .scroll-in.vis{opacity:1;transform:translateY(0)}
-    .scroll-in.vis-left{animation:slideFromLeft .6s cubic-bezier(.16,1,.3,1) forwards}
-    .scroll-in.vis-right{animation:slideFromRight .6s cubic-bezier(.16,1,.3,1) forwards}
-    @keyframes slideFromLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes slideFromRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-    .scroll-in.vis-scale{animation:scaleIn .5s cubic-bezier(.16,1,.3,1) forwards}
-    @keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-    /* Stagger children */
-    .stagger-in>.scroll-in:nth-child(1){transition-delay:.05s}
-    .stagger-in>.scroll-in:nth-child(2){transition-delay:.12s}
-    .stagger-in>.scroll-in:nth-child(3){transition-delay:.19s}
-    .stagger-in>.scroll-in:nth-child(4){transition-delay:.26s}
-    /* Smooth scroll behavior */
-    html{scroll-behavior:smooth}
-    /* Tap ripple effect */
-    .ripple{position:relative;overflow:hidden}
-    .ripple::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--x,50%) var(--y,50%),rgba(143,181,162,.25) 0%,transparent 60%);opacity:0;transition:opacity .4s}
-    .ripple:active::after{opacity:1;transition:opacity 0s}
-    /* Counter animation */
-    @keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .count-up{animation:countUp .8s ease-out forwards}
   </style>
 </head>
 <body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+
+  <!-- Floating CTA -->
+  <a href="https://kamfinanceblog.blogspot.com/p/financial-tools.html" class="floating-cta" target="_blank">
+    <span class="pulse"></span>
+    ابدأ الفحص المالي المجاني
+  </a>
+
   <div class="bubble b1"></div>
   <div class="bubble b2"></div>
   <div class="bubble b3"></div>
-
   <div class="wrap">
-
-    <!-- ========== HEADER ========== -->
     <header class="hdr">
-      <svg class="logo-img" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" style="width:240px;height:auto;margin:0 auto 8px;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.12))">
+      <svg class="logo-img" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
         <text x="250" y="72" text-anchor="middle" font-family="'Noto Sans Arabic',sans-serif" font-weight="800" font-size="58" fill="#2c3e3a" direction="rtl">كيف أدير مالي</text>
       </svg>
       <p class="tag">خطوة تقربك من وجهتك المالية</p>
       <p class="desc">مساحة مخصصة لتعلم إدارة المال وبناء الثروة</p>
       <div class="soc-row">
-        <a href="https://tiktok.com/@kayf_adir_mali" class="soc" target="_blank" title="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.41a8.16 8.16 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.84z"/></svg></a>
-        <a href="https://www.youtube.com/@kayf_adir_mali" class="soc" target="_blank" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19 31.56 31.56 0 000 12a31.56 31.56 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.84.55 9.38.55 9.38.55s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.56 31.56 0 0024 12a31.56 31.56 0 00-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
-        <a href="https://instagram.com/kayf_adir_mali" class="soc" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.63-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8zm6.41-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
-        <a href="https://www.facebook.com/share/1DREZmwJ3K/?mibextid=wwXIfr" class="soc" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.09 24 12.07z"/></svg></a>
-        <a href="https://whatsapp.com/channel/0029VaLRCqoCnA7qLKNB9i1D" class="soc" target="_blank" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15s-.78.97-.95 1.17-.35.22-.65.07c-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.64-.93-2.25-.25-.59-.5-.51-.68-.52h-.58c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.49 1.07 2.89 1.22 3.09c.15.2 2.1 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.69.25-1.29.18-1.42-.08-.12-.28-.2-.58-.34zm-5.44 7.44h-.02a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37A9.87 9.87 0 012.18 12a9.82 9.82 0 0116.78-6.97A9.82 9.82 0 0121.82 12a9.87 9.87 0 01-9.79 9.82zM20.52 3.48A11.8 11.8 0 0012.05 0 11.94 11.94 0 001.04 17.88L0 24l6.3-1.65A11.94 11.94 0 0012.05 24a11.94 11.94 0 0011.94-11.95c0-3.19-1.24-6.19-3.48-8.45z"/></svg></a>
+        <a href="https://tiktok.com/@kayf_adir_mali" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.41a8.16 8.16 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.84z"/></svg></a>
+        <a href="https://www.youtube.com/@kayf_adir_mali" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19 31.56 31.56 0 000 12a31.56 31.56 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.84.55 9.38.55 9.38.55s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.56 31.56 0 0024 12a31.56 31.56 0 00-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+        <a href="https://instagram.com/kayf_adir_mali" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.63-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8zm6.41-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
+        <a href="https://www.facebook.com/share/1DREZmwJ3K/?mibextid=wwXIfr" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.09 24 12.07z"/></svg></a>
+        <a href="https://whatsapp.com/channel/0029VaLRCqoCnA7qLKNB9i1D" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15s-.78.97-.95 1.17-.35.22-.65.07c-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.64-.93-2.25-.25-.59-.5-.51-.68-.52h-.58c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.49 1.07 2.89 1.22 3.09c.15.2 2.1 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.69.25-1.29.18-1.42-.08-.12-.28-.2-.58-.34zm-5.44 7.44h-.02a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37A9.87 9.87 0 012.18 12a9.82 9.82 0 0116.78-6.97A9.82 9.82 0 0121.82 12a9.87 9.87 0 01-9.79 9.82zM20.52 3.48A11.8 11.8 0 0012.05 0 11.94 11.94 0 001.04 17.88L0 24l6.3-1.65A11.94 11.94 0 0012.05 24a11.94 11.94 0 0011.94-11.95c0-3.19-1.24-6.19-3.48-8.45z"/></svg></a>
       </div>
     </header>
-
-    <!-- ========== FUNNEL PROGRESS ========== -->
-    <div class="funnel-progress">
-      <div class="fp-dot active" data-step="discover"></div>
-      <div class="fp-dot" data-step="quiz"></div>
-      <div class="fp-dot" data-step="choose"></div>
-      <div class="fp-dot" data-step="act"></div>
+    <div class="funnel-progress scroll-reveal">
+      <div class="fp-dot active"></div>
+      <div class="fp-dot"></div>
+      <div class="fp-dot"></div>
+      <div class="fp-dot"></div>
     </div>
     <div class="fp-label">اكتشف</div>
-
-    <!-- ========== TESTIMONIAL CAROUSEL ========== -->
-    <div class="testi swipe-hint">
+    <div class="testi scroll-reveal">
       <div class="testi-track">
-
-        <!-- 1. AiChef — BEST: full transformation story -->
         <div class="testi-slide active">
           <div class="testi-stars">★★★★★</div>
           <div class="testi-quote">"بفضل الله ثم مساعدتج، اليوم وضعي أحسن في سداد ديوني وعندي محفظة طوارئ تكفيني ٦ شهور — مع إني قبل ما كنت أعرف شو هي محفظة الطوارئ!"</div>
@@ -274,8 +240,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 2. ALBASHIR — 8 months consistent results -->
         <div class="testi-slide">
           <div class="testi-stars">★★★★★</div>
           <div class="testi-quote">"بفضل فيديوهاتك الحمدلله اكملت ٨ شهور منذ بدء النظام المالي الجديد... توفير وسداد ديون بشكل منظم — جزاك الله خير"</div>
@@ -287,8 +251,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 3. ندى — coaching client from Saudi -->
         <div class="testi-slide">
           <div class="testi-stars">★★★★★</div>
           <div class="testi-quote">"ابدعتي بصراحه... الخطة تحتاج لعزيمة وصبر والله يعطيني القوة — انتي رائعه!"</div>
@@ -300,8 +262,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 4. danaasiri75 — paid off loan -->
         <div class="testi-slide">
           <div class="testi-stars">★★★★★</div>
           <div class="testi-quote">"الحمدلله قدرت أسدد قرض وبدأت أنظم صرفي وادخاري — كنتي دافع لي"</div>
@@ -313,8 +273,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 5. حفصة — clarity + saving -->
         <div class="testi-slide">
           <div class="testi-stars">★★★★★</div>
           <div class="testi-quote">"زادت اتضحت الخطة والفلوس اللي تجيني هالمرة أخليها مع الادخار — شكراً لك وربي يجازيك كل خير"</div>
@@ -326,8 +284,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 6. Hind — repeat coaching client -->
         <div class="testi-slide">
           <div class="testi-stars">★★★★★</div>
           <div class="testi-quote">"I loved the session — I will book a session again for the next month."</div>
@@ -339,39 +295,32 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="testi-dots">
-        <div class="testi-dot active" data-i="0"></div>
-        <div class="testi-dot" data-i="1"></div>
-        <div class="testi-dot" data-i="2"></div>
-        <div class="testi-dot" data-i="3"></div>
-        <div class="testi-dot" data-i="4"></div>
-        <div class="testi-dot" data-i="5"></div>
+        <div class="testi-dot active" onclick="showTestiSlide(0)"></div>
+        <div class="testi-dot" onclick="showTestiSlide(1)"></div>
+        <div class="testi-dot" onclick="showTestiSlide(2)"></div>
+        <div class="testi-dot" onclick="showTestiSlide(3)"></div>
+        <div class="testi-dot" onclick="showTestiSlide(4)"></div>
+        <div class="testi-dot" onclick="showTestiSlide(5)"></div>
       </div>
     </div>
-
     <div class="flow-arrow">▼</div>
-
-    <!-- ========== QUIZ CTA (PRIORITY #1 — EMAIL CAPTURE) ========== -->
-    <div class="quiz-cta">
-      <div class="q-tag">مجاني — دقيقتين فقط</div>
+    <div class="quiz-cta scroll-reveal">
+      <div class="q-tag">مجاني 100% — دقيقتين فقط</div>
       <div class="q-icon">🩺</div>
       <h2>ما تعرف من وين تبدأ؟</h2>
-      <p>حلّل وضعك المالي في دقيقتين واحصل على نتيجة + توصيات مخصصة لوضعك</p>
-      <a href="https://kamfinanceblog.blogspot.com/p/financial-tools.html" class="qbtn" target="_blank">ابدأ الفحص المالي ←</a>
+      <p>حلّل وضعك المالي في دقيقتين واحصل على نتيجة فورية + توصيات مخصصة لك</p>
+      <a href="https://kamfinanceblog.blogspot.com/p/financial-tools.html" class="qbtn confetti-trigger" target="_blank">ابدأ الفحص المالي المجاني ←</a>
       <p class="q-sub">+700 شخص سوّوا الفحص</p>
     </div>
-
     <div class="flow-arrow">▼</div>
-
-    <!-- ========== PATH SELECTOR ========== -->
-    <section class="paths">
+    <!-- PATH SELECTOR with all products -->
+    <section class="paths scroll-reveal">
       <h2 class="paths-title">ماهو أكبر تحدي مالي تواجهه؟</h2>
       <p class="paths-sub">اختر تحديك وشوف الأدوات المناسبة لك</p>
       <div class="path-list">
-
-        <div class="pcard" data-path="budget">
+        <div class="pcard" onclick="togglePath('budget')">
           <div class="pcard-icon">💸</div>
           <div class="pcard-text">
             <h3>مصاريفي أكثر من دخلي</h3>
@@ -379,61 +328,48 @@
           </div>
           <span class="arrow">‹</span>
         </div>
-        <!-- PATH A: Products unfold here -->
         <div id="p-budget" class="prods">
-        <div class="prods-inner">
-          <a href="https://kamfinance.gumroad.com/l/xztfc" class="prod" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📒</div>
-              <div class="prod-info">
-                <div class="prod-name">دفتر الميزانية الذكي</div>
-                <div class="prod-desc">نظّم مصروفاتك الشهرية ببساطة ووضوح — الخطوة الأولى لأي شخص يبغى يفهم وين تروح فلوسه</div>
-                <div class="prod-price">
-                  <span class="badge">$5</span>
-                  <span class="sar-aed">~١٩ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~١٨ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+          <div class="prods-inner">
+            <a href="https://kamfinance.gumroad.com/l/budgetingsheet" class="prod confetti-trigger" target="_blank">
+              <div class="prod-badge">🔥 الأكثر مبيعاً</div>
+              <div class="prod-top">
+                <div class="prod-emoji">📒</div>
+                <div class="prod-info">
+                  <div class="prod-name">دفتر الميزانية الذكي</div>
+                  <div class="prod-desc">نظّم مصروفاتك الشهرية ببساطة ووضوح</div>
+                  <div class="prod-price"><span class="badge">$5</span><span class="sar-aed">~19 <i class="currency-symbol sar-symbol"></i> / ~18 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">ابدأ الآن ←</div>
-          </a>
-
-          <div class="prod-upsell-label">↓ تبغى أداة أشمل؟ ↓</div>
-
-          <a href="https://kamfinance.gumroad.com/l/mali" class="prod hero" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📊</div>
-              <div class="prod-info">
-                <div class="prod-name">مالي | Mali — أداة إدارة المال الشاملة</div>
-                <div class="prod-desc">ميزانية + تتبع مصاريف + تحليلات ذكية + لوحة ثروة — كل شي من مكان واحد</div>
-                <div class="prod-price">
-                  <span class="badge">$29.99</span>
-                  <span class="sar-aed">~١١٢ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~١١٠ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+              <div class="prod-cta">ابدأ الآن ←</div>
+            </a>
+            <div class="prod-upsell-label">↓ تبغى أداة أشمل؟ ↓</div>
+            <a href="https://kamfinance.gumroad.com/l/mali" class="prod hero confetti-trigger" target="_blank">
+              <div class="prod-badge">⭐ الأفضل</div>
+              <div class="prod-top">
+                <div class="prod-emoji">📊</div>
+                <div class="prod-info">
+                  <div class="prod-name">مالي | Mali — أداة إدارة المال الشاملة</div>
+                  <div class="prod-desc">ميزانية + تتبع مصاريف + تحليلات ذكية + لوحة ثروة</div>
+                  <div class="prod-price"><span class="badge">$29.99</span><span class="sar-aed">~112 <i class="currency-symbol sar-symbol"></i> / ~110 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">جرّب مالي ←</div>
-          </a>
-
-          <div class="prod-upsell-label">↓ تبغى مساعدة شخصية؟ ↓</div>
-
-          <a href="https://kamfinance.gumroad.com/l/nbqdg" class="prod" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📋</div>
-              <div class="prod-info">
-                <div class="prod-name">خطة مالية مخصصة — 3 أهداف واضحة</div>
-                <div class="prod-desc">خطة عملية مفصّلة لمدة 3–6 شهور مصممة خصيصاً لوضعك المالي</div>
-                <div class="prod-price">
-                  <span class="badge">$27</span>
-                  <span class="sar-aed">~١٠١ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~٩٩ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+              <div class="prod-cta">جرّب مالي ←</div>
+            </a>
+            <div class="prod-upsell-label">↓ تبغى مساعدة شخصية؟ ↓</div>
+            <a href="https://kamfinance.gumroad.com/l/ActionPlan" class="prod confetti-trigger" target="_blank">
+              <div class="prod-top">
+                <div class="prod-emoji">📋</div>
+                <div class="prod-info">
+                  <div class="prod-name">خطة العمل المالية | Action Plan</div>
+                  <div class="prod-desc">هدف واحد واضح — خطة عملية ٣ أشهر مصممة خصيصاً لوضعك</div>
+                  <div class="prod-price"><span class="badge">$37</span><span class="sar-aed">~139 <i class="currency-symbol sar-symbol"></i> / ~136 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">اطلب خطتك ←</div>
-          </a>
+              <div class="prod-cta">اطلب خطتك ←</div>
+            </a>
+          </div>
         </div>
-      </div>
-
-        <div class="pcard" data-path="debt">
+        <div class="pcard" onclick="togglePath('debt')">
           <div class="pcard-icon">🏦</div>
           <div class="pcard-text">
             <h3>عندي ديون وما أعرف أبدأ من وين</h3>
@@ -441,61 +377,48 @@
           </div>
           <span class="arrow">‹</span>
         </div>
-        <!-- PATH B: Products unfold here -->
         <div id="p-debt" class="prods">
-        <div class="prods-inner">
-          <a href="https://kamfinance.gumroad.com/l/ciosa" class="prod" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">🧮</div>
-              <div class="prod-info">
-                <div class="prod-name">أداة الخروج من الديون | الكرة الثلجية</div>
-                <div class="prod-desc">حط كل ديونك وشوف خطة السداد — تعرف بالضبط متى تتحرر من كل دين</div>
-                <div class="prod-price">
-                  <span class="badge">$12</span>
-                  <span class="sar-aed">~٤٥ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~٤٤ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+          <div class="prods-inner">
+            <a href="https://kamfinance.gumroad.com/l/ciosa" class="prod confetti-trigger" target="_blank">
+              <div class="prod-badge">🎯 خطة واضحة</div>
+              <div class="prod-top">
+                <div class="prod-emoji">🧮</div>
+                <div class="prod-info">
+                  <div class="prod-name">أداة الخروج من الديون | الكرة الثلجية</div>
+                  <div class="prod-desc">حط كل ديونك وشوف خطة السداد — تعرف بالضبط متى تتحرر</div>
+                  <div class="prod-price"><span class="badge">$10</span><span class="sar-aed">~38 <i class="currency-symbol sar-symbol"></i> / ~37 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">ابدأ خطة السداد ←</div>
-          </a>
-
-          <div class="prod-upsell-label">↓ تبغى تدير كل شي من مكان واحد؟ ↓</div>
-
-          <a href="https://kamfinance.gumroad.com/l/mali" class="prod hero" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📊</div>
-              <div class="prod-info">
-                <div class="prod-name">مالي | Mali — أداة إدارة المال الشاملة</div>
-                <div class="prod-desc">تتبع ديونك + ميزانية + أهداف مالية + تحليلات — نظّم حياتك المالية كلها</div>
-                <div class="prod-price">
-                  <span class="badge">$29.99</span>
-                  <span class="sar-aed">~١١٢ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~١١٠ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+              <div class="prod-cta">ابدأ خطة السداد ←</div>
+            </a>
+            <div class="prod-upsell-label">↓ تبغى تدير كل شي من مكان واحد؟ ↓</div>
+            <a href="https://kamfinance.gumroad.com/l/mali" class="prod hero confetti-trigger" target="_blank">
+              <div class="prod-badge">⭐ الأفضل</div>
+              <div class="prod-top">
+                <div class="prod-emoji">📊</div>
+                <div class="prod-info">
+                  <div class="prod-name">مالي | Mali — أداة إدارة المال الشاملة</div>
+                  <div class="prod-desc">تتبع ديونك + ميزانية + أهداف مالية + تحليلات</div>
+                  <div class="prod-price"><span class="badge">$29.99</span><span class="sar-aed">~112 <i class="currency-symbol sar-symbol"></i> / ~110 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">جرّب مالي ←</div>
-          </a>
-
-          <div class="prod-upsell-label">↓ تبغى مساعدة شخصية؟ ↓</div>
-
-          <a href="https://kamfinance.gumroad.com/l/nbqdg" class="prod" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📋</div>
-              <div class="prod-info">
-                <div class="prod-name">خطة مالية مخصصة — 3 أهداف واضحة</div>
-                <div class="prod-desc">خطة عملية مفصّلة لمدة 3–6 شهور مصممة خصيصاً لوضعك المالي</div>
-                <div class="prod-price">
-                  <span class="badge">$27</span>
-                  <span class="sar-aed">~١٠١ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~٩٩ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+              <div class="prod-cta">جرّب مالي ←</div>
+            </a>
+            <div class="prod-upsell-label">↓ تبغى مساعدة شخصية؟ ↓</div>
+            <a href="https://kamfinance.gumroad.com/l/claritycall" class="prod confetti-trigger" target="_blank">
+              <div class="prod-top">
+                <div class="prod-emoji">💬</div>
+                <div class="prod-info">
+                  <div class="prod-name">مكالمة الوضوح | Clarity Call</div>
+                  <div class="prod-desc">٣ أولويات محددة — مكالمة ٦٠ دقيقة + خطة ٦ أشهر لحل ديونك</div>
+                  <div class="prod-price"><span class="badge">$120</span><span class="sar-aed">~450 <i class="currency-symbol sar-symbol"></i> / ~440 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">اطلب خطتك ←</div>
-          </a>
+              <div class="prod-cta">احجز مكالمتك ←</div>
+            </a>
+          </div>
         </div>
-      </div>
-
-        <div class="pcard" data-path="goals">
+        <div class="pcard" onclick="togglePath('goals')">
           <div class="pcard-icon">🎯</div>
           <div class="pcard-text">
             <h3>أبغى أحقق أهدافي المالية</h3>
@@ -503,69 +426,71 @@
           </div>
           <span class="arrow">‹</span>
         </div>
-        <!-- PATH C: Products unfold here -->
         <div id="p-goals" class="prods">
-        <div class="prods-inner">
-          <a href="https://kamfinance.gumroad.com/l/mali" class="prod hero" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📊</div>
-              <div class="prod-info">
-                <div class="prod-name">مالي | Mali — أداة إدارة المال الشاملة</div>
-                <div class="prod-desc">تتبع أهدافك المالية + ميزانية + مصاريف + تحليلات + لوحة ثروة — كل شي تحتاجه</div>
-                <div class="prod-price">
-                  <span class="badge">$29.99</span>
-                  <span class="sar-aed">~١١٢ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~١١٠ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+          <div class="prods-inner">
+            <a href="https://kamfinance.gumroad.com/l/mali" class="prod hero confetti-trigger" target="_blank">
+              <div class="prod-badge">⭐ الأفضل</div>
+              <div class="prod-top">
+                <div class="prod-emoji">📊</div>
+                <div class="prod-info">
+                  <div class="prod-name">مالي | Mali — أداة إدارة المال الشاملة</div>
+                  <div class="prod-desc">تتبع أهدافك المالية + ميزانية + مصاريف + تحليلات + لوحة ثروة</div>
+                  <div class="prod-price"><span class="badge">$29.99</span><span class="sar-aed">~112 <i class="currency-symbol sar-symbol"></i> / ~110 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">جرّب مالي الآن ←</div>
-          </a>
-
-          <div class="prod-upsell-label">↓ تبغى خطة مفصّلة لأهدافك؟ ↓</div>
-
-          <a href="https://kamfinance.gumroad.com/l/nbqdg" class="prod" target="_blank">
-            <div class="prod-top">
-              <div class="prod-emoji">📋</div>
-              <div class="prod-info">
-                <div class="prod-name">خطة مالية مخصصة — 3 أهداف واضحة</div>
-                <div class="prod-desc">خطة عملية مفصّلة لمدة 3–6 شهور مصممة خصيصاً لوضعك المالي</div>
-                <div class="prod-price">
-                  <span class="badge">$27</span>
-                  <span class="sar-aed">~١٠١ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~٩٩ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+              <div class="prod-cta">جرّب مالي الآن ←</div>
+            </a>
+            <div class="prod-upsell-label">↓ تبغى خطة مفصّلة لأهدافك؟ ↓</div>
+            <a href="https://kamfinance.gumroad.com/l/bookasession" class="prod confetti-trigger" target="_blank">
+              <div class="prod-top">
+                <div class="prod-emoji">🎯</div>
+                <div class="prod-info">
+                  <div class="prod-name">التحليل المالي العميق | Deep Dive</div>
+                  <div class="prod-desc">خطة شاملة ١٢ شهر — مكالمة ٩٠ دقيقة + تدقيق كامل لكل جوانب حياتك المالية</div>
+                  <div class="prod-price"><span class="badge">$179</span><span class="sar-aed">~671 <i class="currency-symbol sar-symbol"></i> / ~657 <i class="currency-symbol aed-symbol"></i></span></div>
                 </div>
               </div>
-            </div>
-            <div class="prod-cta">اطلب خطتك ←</div>
-          </a>
+              <div class="prod-cta">احجز جلستك ←</div>
+            </a>
+          </div>
         </div>
       </div>
-
-      </div><!-- /path-list -->
     </section>
-
-    <!-- ========== FREE GUIDE (EXIT RAMP — "NOT READY TO BUY") ========== -->
-    <div class="exit-ramp">
+    <div class="exit-ramp scroll-reveal">
       <div class="er-tag">مجاني 100%</div>
       <div class="er-icon">📘</div>
       <h3>ما تعرف تحط أهداف مالية؟</h3>
       <p>حمّل الدليل العملي المجاني — حدد أهدافك، رتّب أولوياتك، وابدأ التنفيذ خطوة بخطوة</p>
-      <a href="https://kamfinance.gumroad.com/l/bdrmxm" class="cbtn" target="_blank">حمّل الدليل المجاني ←</a>
+      <a href="https://kamfinance.gumroad.com/l/bdrmxm" class="cbtn confetti-trigger" target="_blank">حمّل الدليل المجاني ←</a>
     </div>
-
-    <!-- ========== COACHING SPOTLIGHT ========== -->
-    <div class="coach">
-      <div class="coach-icon">💡</div>
+    <div class="consult-spot scroll-reveal">
       <h3>محتاج مساعدة شخصية؟</h3>
-      <p class="coach-sub">جلسة تحليل مالي معمّق — ساعة كاملة Google Meet مع خطة تنفيذية مفصّلة</p>
-      <div class="prod-price" style="margin-bottom:12px">
-        <span class="badge">$149</span>
-        <span class="sar-aed">~٥٥٩ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~٥٤٧ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span>
+      <p class="cs-sub">جلسات استشارية مخصصة — اختر المستوى المناسب لك</p>
+      <div class="consult-grid">
+        <a href="https://kamfinance.gumroad.com/l/ActionPlan" class="consult-card confetti-trigger" target="_blank">
+          <div class="cs-icon">📋</div>
+          <div class="cs-name">خطة العمل | Action Plan</div>
+          <div class="cs-desc">هدف واحد واضح — خطة ٣ أشهر</div>
+          <div class="cs-price">~136 <i class="currency-symbol aed-symbol"></i> / ~139 <i class="currency-symbol sar-symbol"></i></div>
+          <span class="cs-btn">ابدأ الآن — $37</span>
+        </a>
+        <a href="https://kamfinance.gumroad.com/l/claritycall" class="consult-card confetti-trigger" target="_blank">
+          <div class="cs-icon">💬</div>
+          <div class="cs-name">مكالمة الوضوح | Clarity Call</div>
+          <div class="cs-desc">٣ أولويات — مكالمة ٦٠ دقيقة + خطة ٦ أشهر</div>
+          <div class="cs-price">~440 <i class="currency-symbol aed-symbol"></i> / ~450 <i class="currency-symbol sar-symbol"></i></div>
+          <span class="cs-btn">احجز الآن — $120</span>
+        </a>
+        <a href="https://kamfinance.gumroad.com/l/bookasession" class="consult-card confetti-trigger" target="_blank">
+          <div class="cs-icon">🎯</div>
+          <div class="cs-name">التحليل العميق | Deep Dive</div>
+          <div class="cs-desc">تحليل شامل — مكالمة ٩٠ دقيقة + خطة ١٢ شهر</div>
+          <div class="cs-price">~657 <i class="currency-symbol aed-symbol"></i> / ~671 <i class="currency-symbol sar-symbol"></i></div>
+          <span class="cs-btn">احجز الآن — $179</span>
+        </a>
       </div>
-      <a href="https://kamfinance.gumroad.com/l/dpmct" class="cbtn" target="_blank">احجز جلستك ←</a>
     </div>
-
-    <!-- ========== COLLAPSIBLE: BOOKS & GUIDES ========== -->
-    <div class="csec">
+    <div class="csec scroll-reveal">
       <div class="chdr" onclick="toggle(this)">
         <span>📚 كتب وأدلة</span>
         <span class="ctgl">▼</span>
@@ -575,21 +500,19 @@
           <div class="citem">
             <div class="citem-title">🛡️ دليل صندوق الطوارئ العملي</div>
             <div class="citem-desc">من الصفر إلى الأمان المالي — خطوة بخطوة</div>
-            <div class="prod-price"><span class="badge">$4.99</span><span class="sar-aed">~١٩ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~١٨ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span></div>
-            <a href="https://kamfinance.gumroad.com/l/emergencyfundguide" class="cbtn" target="_blank">اشتر الآن ←</a>
+            <div class="prod-price"><span class="badge">$4.99</span><span class="sar-aed">~19 <i class="currency-symbol sar-symbol"></i> / ~18 <i class="currency-symbol aed-symbol"></i></span></div>
+            <a href="https://kamfinance.gumroad.com/l/emergencyfundguide" class="cbtn confetti-trigger" target="_blank">اشتر الآن ←</a>
           </div>
           <div class="citem">
             <div class="citem-title">📈 الدليل الشامل للمستثمر العربي المبتدئ</div>
             <div class="citem-desc">كل ما تحتاجه لبدء رحلتك الاستثمارية بثقة ووعي</div>
-            <div class="prod-price"><span class="badge">$29</span><span class="sar-aed">~١٠٩ <span class="sar-sym"><svg viewBox="96 -802 896 1000"><g transform="scale(1,-1)"><path d="M654 -84 992 -12Q986 -72 961 -126L623 -198Q629 -138 654 -84ZM961 89 623 17V232L518 210V91Q518 75 509 61L454 -20Q433 -51 395 -59L97 -123Q103 -63 128 -8L413 52V188L147 131Q153 191 177 245L413 295V714Q457 768 518 802V318L623 340V661Q668 715 729 749V362L992 418Q986 359 961 304L729 255V147L992 203Q986 143 961 89Z" fill="currentColor"/></g></svg></span> | ~١٠٧ <span class="aed-sym"><svg viewBox="0 0 1000 870"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z" fill="currentColor"/></svg></span></span></div>
-            <a href="https://kamfinance.gumroad.com/l/investingbeginnerguidearabic" class="cbtn" target="_blank">اشتر الآن ←</a>
+            <div class="prod-price"><span class="badge">$29</span><span class="sar-aed">~109 <i class="currency-symbol sar-symbol"></i> / ~107 <i class="currency-symbol aed-symbol"></i></span></div>
+            <a href="https://kamfinance.gumroad.com/l/investingbeginnerguidearabic" class="cbtn confetti-trigger" target="_blank">اشتر الآن ←</a>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- ========== COLLAPSIBLE: RECOMMENDED TOOLS ========== -->
-    <div class="csec">
+    <div class="csec scroll-reveal">
       <div class="chdr" onclick="toggle(this)">
         <span>💰 أدوات أنصح بها</span>
         <span class="ctgl">▼</span>
@@ -597,35 +520,32 @@
       <div class="ccnt">
         <div class="ccnt-inner">
           <div class="citem">
-            <div class="citem-title">
-              <img class="tool-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACqklEQVR4nO2Zz2vTYBjHv3mb/k7XVefEsk7FqeiKytjsLp6UigMVVPwLFMWDJ+/e9Q/QiwcFEcSD9CJenD8YEzY9DAsWnMicxY25riWpaUjfeKgLbZPGwxuXBPI5Nc/79n2+37x5+z5vw8GCdPqIZtW+VZTLC1yvNtMGtwjvxswI6Q64VTxgro38q4Pb6NZIejW4mXatpDvgFTY1G9aA1+C8ePfb8fwM+AacxjfgNJ43wNsxiJLNQDo/AeXwEGgqDjQ1cPUGSK0O/kcF/Pc19D14ZUcqA8wGpAvHUb2W76xreUAL86CpONTdOwC6350G1HQK1aundPHx53MQnr0HqYho7kxCPnEI4sVJUCFih1ZTmAzIkweAQGsZEVFG8t5L4O++zi+vQ3gyg1hhHrUbp5mF9oJpEdNtQse1FjAOR6QG+u8WWNJYwmQgsFrVP1Mhgsrty1BGM/qsbAVMj1BkbhE1RYUWag0j50Yg50bAKSqCiysIfVpCdLqI4Jeftog1g7karU+NYePmGYD0PHcj+rqI/jsFcGqTJZUptpTT6vAApHPjkCf2obkrZdon8fgdEg/fsKYyYPt5gKbiaBzbA+nsOJRsRo/zS2sYvHLfzlQA/kMpQSoSotNFDNx6BH55XY/TZMzuVK18LF+u54+iPjUGcCbPP9VANkT9MvBLNPaxAaZfIU0Io3o9D/FSDvHCPMIfviKwUoUWDeH3ySyU0WG9b2S2xCzWDFuKOXVoO6oWu22oVIbwdNaOVAbY9oGZEkA1KAfTUPcOgvbFQBMRaHwARJQR/LaKyNvPiL34CE6ldmnuwP9Xwml8A07jG3Aa34DT+AacxjfgNMTqJbLbKZcXOO/PAGD9Kt+tbGom3QEv0K6V9GpwK90aDWvAzSbMtFmKdctpzeqm/gERldYNIY+WGQAAAABJRU5ErkJggg==" alt="Sarwa">
-              ثروة | Sarwa
+            <div class="citem-title">ثروة | Sarwa</div>
+            <div class="citem-desc">ابدأ استثمارك واحصل على مكافأة تصل حتى ٣٠٠٠ درهم</div>
+            <div class="copy-code" onclick="copyCode(this,'HDAS862F')">
+              <span>كود: HDAS862F</span>
+              <span>📋</span>
             </div>
-            <div class="citem-desc">ابدأ استثمارك واحصل على مكافأة تصل حتى ٣٠٠٠ درهم عند تمويل حسابك</div>
             <a href="https://www.sarwa.co/invite/HDAS862F" class="cbtn" target="_blank">سجّل الآن ←</a>
           </div>
           <div class="citem">
-            <div class="citem-title">
-              <img class="tool-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACuklEQVR4nO2ZP0jjUBzHP4mHo5OT450oDnmWIIiHCIKDg+AmCOW6CLq4FMFFQdBBQRGdVBRayKKDQx071OWuoC7VpUIPQehkBx0F9XfD0dLLP8shJoF8IMvvvTy+n/d+gTbR8EFExG/8s9A0TfMccyuGJbgdNxHdXghreHDPpr83IWzYM+peA2GmOatuL0SFembHMxA1tCjufjORP4FYIGhigc/i26+Uaz0SAvXwbhKREKjz+3vWUftwgcvLS5RS5PP5D1mvvutu4SFkJ2BvEa++b6YlgVqthlKKo6Oj/0vWAvY+bw7vtfvgInB/f8/U1BSmaaKUYnV1lWQyCcDOzg5KKWq1GuVyGaUUSilGRkbY3Nx0LH52dkYikSCbzbK1tcXo6CjDw8OsrKzw8vLyz1yvkH7hgb+/6prZ398X0zTl+PhYKpWKiIg8PDyIYRhyeHhony5vb2+Sy+XEMAwplUpycXEhhmFIOp2WRCIhJycncnp6KoZhyPn5uVQqFVFKiWVZjrVERL7+/NG4WuGLXcg0Tdra2lhbWwNgYmKCdDrtEL+9vWV5eZm7uzuen58BqFardHZ2ApDP5+nt7WVycpLt7W0A5ufnG/ff3Nz472yLOFpoYGCAQqHAwcEBPT09XF1d0d7eDsDT01NjXi6Xo1wuk8lkWFxcBOD19bUxPjMzQ7VaZWFhge7ubgD29vYolUpcX1+zvr7uGqjeMu+2jpdAJpNhaGiI2dlZHh8fmZubo6Ojg7GxMSzLYnBwEIDx8XG6urqYnp5mY2PDsXBfXx+7u7sUi0WKxSKpVIqlpSX6+/tRSmFZlmeoVsND/H8geGKBoIkFgiYWCJpYIGhigaCJBYImFgiaWCBodL+PyGFH0zQt+icA/p/yw0o9s24vRIHmrLrXQFixZ3Q8A2GWcMvmGzYs74z8NvUPV3psEtpj5q4AAAAASUVORK5CYII=" alt="Stake">
-              ستيك | Stake
-            </div>
-            <div class="citem-desc">استثمر في العقار واحصل على 150 هدية عند التسجيل</div>
+            <div class="citem-title">ستيك | Stake</div>
+            <div class="citem-desc">استثمر في العقار واحصل على 150 هدية</div>
             <a href="https://app.getstake.com/rewards?c=SAHAR306&n=Sahar" class="cbtn" target="_blank">سجّل الآن ←</a>
           </div>
           <div class="citem">
-            <div class="citem-title">
-              <img class="tool-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAByklEQVR4nO2aMU7DMBiFnyPEzCXKEVBG7sESCSEkMnViY8jGlIlKUVWJJRMrB2BEHCG9CQtMSVvHseP42TG03xTF0a/3/vfHSdQKaHj6fP3RrYeiSDMxtKZciEW4jMpIIp+IVTyg1paYLogNWaMYWnDhfvnSO1eVOas8gN04CYAnXiVchmmkSDNxxig0Rrh8LcuIcO2+jXgZhoneLsTkanHuszwAxwRM3dcZ+Np+A3BPwWsCIZhswGX2gV06rnW8JRBi/oFjHiEGjJS8GWjKGk1Z+yrfMdmAbvu7eH/rjk0mXLdRyquEiaascbm8Ua5tVuvu+Pbhzrq20wjZdK9NQpfIZrU+MDSGIAm0jL0nbFJxNlCV+cHDaH/+dUwZFxWUXagqc6txYokHyNso+6trDFQDj4trZrlRnF4lbHneflDrnRJomWP+AaKBoVcF22tsCTZCPsQDJAPto3+MSNt3HRNBEvDVfYBgQO5o6BS8J+Cz+4CjgaFOtqJ14lkpHO+DzNRB0+hE9T0wJ7MYiPaDZg6CG2B2HwAS3Y/IIYVMoUgz8T9GaGoKtjBTazUn8om/wL7WZGiBDav7ssbePRBzEiptWrGx/HdC19RfAi6UWxChuYEAAAAASUVORK5CYII=" alt="TapTap Send">
-              تاب تاب سند | Taptap Send
+            <div class="citem-title">تاب تاب سند | TapTap Send</div>
+            <div class="citem-desc">أرسل فلوس من الإمارات — كود SAHAR919 هدية ١٥ درهم</div>
+            <div class="copy-code" onclick="copyCode(this,'SAHAR919')">
+              <span>كود: SAHAR919</span>
+              <span>📋</span>
             </div>
-            <div class="citem-desc">أرسل فلوس من الإمارات وأوروبا لدول كثيرة — استخدم كود SAHAR919 واحصل على ١٥ درهم عند إرسال ٥٠ درهم أو أكثر</div>
             <a href="https://taptapsend.onelink.me/Lrab/appreferral" class="cbtn" target="_blank">حمّل التطبيق ←</a>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- ========== COLLAPSIBLE: FREE CONTENT ========== -->
-    <div class="csec">
+    <div class="csec scroll-reveal">
       <div class="chdr" onclick="toggle(this)">
         <span>📝 محتوى مجاني</span>
         <span class="ctgl">▼</span>
@@ -640,23 +560,17 @@
         </div>
       </div>
     </div>
-
-    <!-- ========== COMMUNITY ========== -->
-    <div class="community">
+    <div class="community scroll-reveal">
       <div class="cm-tag">مجتمع حصري</div>
       <div class="cm-icon">👥</div>
       <h3>النادي المالي — مجتمع حصري</h3>
-      <p class="cm-sub">محتوى حصري + وصول مباشر لصندوق الرسائل للإجابة على أسئلتك المالية + متابعة شهرية</p>
-      <a href="https://tiktok.me/group/ZSm6qB7Fx/" class="cbtn" target="_blank">انضم للنادي ←</a>
+      <p class="cm-sub">محتوى حصري + وصول مباشر + متابعة شهرية</p>
+      <a href="https://tiktok.me/group/ZSm6qB7Fx/" class="cbtn confetti-trigger" target="_blank">انضم للنادي ←</a>
     </div>
-
-    <!-- ========== SHOP ALL ========== -->
-    <div class="shop">
+    <div class="shop scroll-reveal">
       <a href="https://kamfinance.gumroad.com/" target="_blank">تصفّح جميع المنتجات ←</a>
     </div>
-
-    <!-- ========== FOOTER ========== -->
-    <footer class="ftr">
+    <footer class="ftr scroll-reveal">
       <div class="soc-row">
         <a href="https://tiktok.com/@kayf_adir_mali" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.41a8.16 8.16 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.84z"/></svg></a>
         <a href="https://www.youtube.com/@kayf_adir_mali" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19 31.56 31.56 0 000 12a31.56 31.56 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.84.55 9.38.55 9.38.55s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.56 31.56 0 0024 12a31.56 31.56 0 00-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
@@ -664,224 +578,110 @@
         <a href="https://www.facebook.com/share/1DREZmwJ3K/?mibextid=wwXIfr" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.09 24 12.07z"/></svg></a>
         <a href="https://whatsapp.com/channel/0029VaLRCqoCnA7qLKNB9i1D" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15s-.78.97-.95 1.17-.35.22-.65.07c-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.64-.93-2.25-.25-.59-.5-.51-.68-.52h-.58c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.49 1.07 2.89 1.22 3.09c.15.2 2.1 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.69.25-1.29.18-1.42-.08-.12-.28-.2-.58-.34zm-5.44 7.44h-.02a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37A9.87 9.87 0 012.18 12a9.82 9.82 0 0116.78-6.97A9.82 9.82 0 0121.82 12a9.87 9.87 0 01-9.79 9.82zM20.52 3.48A11.8 11.8 0 0012.05 0 11.94 11.94 0 001.04 17.88L0 24l6.3-1.65A11.94 11.94 0 0012.05 24a11.94 11.94 0 0011.94-11.95c0-3.19-1.24-6.19-3.48-8.45z"/></svg></a>
       </div>
-      <div class="ftr-links">
-        <a href="mailto:financewithsahar@outlook.com">تواصل عبر الإيميل</a>
-        <a href="https://kamfinance.gumroad.com/" target="_blank">تصفّح المتجر الكامل ←</a>
-      </div>
       <div class="ftr-div"></div>
-      <p class="ftr-copy">© 2026 KAM | كيف أدير مالي</p>
+      <div class="ftr-copy">© 2025 KAM | كيف أدير مالي</div>
     </footer>
-
-    <!-- ========== STICKY FUNNEL NUDGE ========== -->
-    <div class="funnel-nudge" id="funnelNudge">
-      <div class="funnel-nudge-inner">
-        <span class="fn-text">🩺 ما سوّيت الفحص المالي بعد؟</span>
-        <a href="https://kamfinanceblog.blogspot.com/p/financial-tools.html" class="fn-btn" target="_blank">ابدأ الآن</a>
-      </div>
-    </div>
-
   </div>
-
   <script>
-    // === PATH SELECTION ===
-    const pcards = document.querySelectorAll('.pcard');
-    const pmap = {
-      budget: document.getElementById('p-budget'),
-      debt: document.getElementById('p-debt'),
-      goals: document.getElementById('p-goals')
+    // Testimonial Carousel
+    let curSlide=0;
+    const slides=document.querySelectorAll('.testi-slide');
+    const dots=document.querySelectorAll('.testi-dot');
+    function showTestiSlide(n){curSlide=n;slides.forEach((s,i)=>{s.classList.toggle('active',i===n)});dots.forEach((d,i)=>{d.classList.toggle('active',i===n)})}
+    setInterval(()=>{curSlide=(curSlide+1)%slides.length;showTestiSlide(curSlide)},5000);
+
+    // Path Toggle
+    function togglePath(id){
+      const card=event.currentTarget;
+      const prods=document.getElementById('p-'+id);
+      const isOn=card.classList.contains('on');
+      document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('on'));
+      document.querySelectorAll('.prods').forEach(p=>p.classList.remove('on'));
+      if(!isOn){card.classList.add('on');prods.classList.add('on')}
+    }
+
+    // Collapsible Sections
+    function toggle(el){
+      el.classList.toggle('on');
+      const cnt=el.nextElementSibling;
+      cnt.classList.toggle('on');
+    }
+
+    // Scroll Progress Bar
+    window.addEventListener('scroll',()=>{
+      const scrolled=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+      document.querySelector('.scroll-progress-bar').style.width=scrolled+'%';
+    });
+
+    // Floating CTA - shows after 50% scroll
+    window.addEventListener('scroll',()=>{
+      const scrolled=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+      const cta=document.querySelector('.floating-cta');
+      if(scrolled>30)cta.classList.add('show');
+      else cta.classList.remove('show');
+    });
+
+    // Scroll Reveal Animation
+    const revealOnScroll=()=>{
+      const reveals=document.querySelectorAll('.scroll-reveal');
+      reveals.forEach(el=>{
+        const top=el.getBoundingClientRect().top;
+        const visible=150;
+        if(top<window.innerHeight-visible)el.classList.add('revealed');
+      });
     };
-    let activePath = null;
+    window.addEventListener('scroll',revealOnScroll);
+    revealOnScroll();
 
-    pcards.forEach(c => {
-      c.addEventListener('click', () => {
-        const p = c.dataset.path;
-
-        if (c.classList.contains('on')) {
-          c.classList.remove('on');
-          pmap[p].classList.remove('on');
-          activePath = null;
-          return;
-        }
-
-        if (activePath) {
-          activePath.classList.remove('on');
-          pmap[activePath.dataset.path].classList.remove('on');
-        }
-
-        c.classList.add('on');
-        pmap[p].classList.add('on');
-        activePath = c;
-
-        setTimeout(() => {
-          pmap[p].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 120);
-      });
-    });
-
-    // === COLLAPSIBLE TOGGLE ===
-    function toggle(hdr) {
-      hdr.classList.toggle('on');
-      hdr.nextElementSibling.classList.toggle('on');
-    }
-
-    // === TESTIMONIAL CAROUSEL ===
-    const slides = document.querySelectorAll('.testi-slide');
-    const dots = document.querySelectorAll('.testi-dot');
-    let cur = 0;
-    let autoPlay;
-
-    function showSlide(i) {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-      slides[i].classList.add('active');
-      dots[i].classList.add('active');
-      cur = i;
-    }
-
-    function nextSlide() {
-      showSlide((cur + 1) % slides.length);
-    }
-
-    dots.forEach(d => {
-      d.addEventListener('click', () => {
-        showSlide(parseInt(d.dataset.i));
-        clearInterval(autoPlay);
-        autoPlay = setInterval(nextSlide, 4500);
-      });
-    });
-
-    autoPlay = setInterval(nextSlide, 4500);
-
-    // === SCROLL REVEAL ===
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-
-    document.querySelectorAll('.csec, .coach, .shop, .exit-ramp, .community').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity .5s ease, transform .5s ease';
-      obs.observe(el);
-    });
-
-    // === SWIPE SUPPORT FOR TESTIMONIALS ===
-    const testiEl = document.querySelector('.testi');
-    let touchStartX = 0;
-    let touchEndX = 0;
-    testiEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
-    testiEl.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) showSlide((cur + 1) % slides.length);
-        else showSlide((cur - 1 + slides.length) % slides.length);
-        clearInterval(autoPlay);
-        autoPlay = setInterval(nextSlide, 4500);
+    // Confetti Effect
+    function createConfetti(x,y){
+      const colors=['#8FB5A2','#f5e6d3','#2ECC71','#f5a623'];
+      for(let i=0;i<30;i++){
+        const confetti=document.createElement('div');
+        confetti.className='confetti';
+        confetti.style.left=x+'px';
+        confetti.style.top=y+'px';
+        confetti.style.background=colors[Math.floor(Math.random()*colors.length)];
+        confetti.style.width=Math.random()*10+5+'px';
+        confetti.style.height=confetti.style.width;
+        document.body.appendChild(confetti);
+        const angle=Math.random()*Math.PI*2;
+        const velocity=Math.random()*8+4;
+        const vx=Math.cos(angle)*velocity;
+        const vy=Math.sin(angle)*velocity;
+        let px=x,py=y,frame=0;
+        const animate=()=>{
+          frame++;
+          px+=vx;
+          py+=vy+frame*.1;
+          confetti.style.left=px+'px';
+          confetti.style.top=py+'px';
+          confetti.style.opacity=Math.max(0,1-frame/60);
+          if(frame<60)requestAnimationFrame(animate);
+          else confetti.remove();
+        };
+        animate();
       }
-    }, {passive: true});
+    }
 
-    // === FUNNEL PROGRESS DOTS ===
-    const fpDots = document.querySelectorAll('.fp-dot');
-    const fpLabel = document.querySelector('.fp-label');
-    const stepLabels = {discover:'اكتشف', quiz:'افحص وضعك', choose:'اختر مسارك', act:'ابدأ التنفيذ'};
-    const stepSections = {
-      discover: document.querySelector('.testi'),
-      quiz: document.querySelector('.quiz-cta'),
-      choose: document.querySelector('.paths'),
-      act: document.querySelector('.exit-ramp')
-    };
-    const fpObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const step = Object.keys(stepSections).find(k => stepSections[k] === e.target);
-          if (step) {
-            fpDots.forEach(d => d.classList.toggle('active',
-              Object.keys(stepLabels).indexOf(d.dataset.step) <= Object.keys(stepLabels).indexOf(step)));
-            fpLabel.textContent = stepLabels[step];
-          }
-        }
-      });
-    }, { threshold: 0.4 });
-    Object.values(stepSections).forEach(s => { if(s) fpObs.observe(s); });
-
-    // === STICKY FUNNEL NUDGE ===
-    const nudge = document.getElementById('funnelNudge');
-    const quizCta = document.querySelector('.quiz-cta');
-    let nudgeShown = false;
-    const nudgeObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        // Show nudge when quiz CTA scrolls out of view (user scrolled past it)
-        if (!e.isIntersecting && window.scrollY > 300) {
-          nudge.classList.add('show');
-          nudgeShown = true;
-        } else {
-          nudge.classList.remove('show');
-        }
-      });
-    }, { threshold: 0 });
-    nudgeObs.observe(quizCta);
-
-    // === ENHANCED SCROLL ANIMATIONS ===
-    // Apply scroll-in class to major sections
-    document.querySelectorAll('.testi, .quiz-cta, .paths, .exit-ramp, .coach, .csec, .community, .shop, .ftr').forEach(el => {
-      el.classList.add('scroll-in');
-    });
-    // Products inside paths get staggered
-    document.querySelectorAll('.prods-inner').forEach(el => el.classList.add('stagger-in'));
-    document.querySelectorAll('.prod, .prod-upsell-label').forEach(el => el.classList.add('scroll-in'));
-    // Path cards get alternating directions
-    document.querySelectorAll('.pcard').forEach((el, i) => {
-      el.classList.add('scroll-in');
-      el.dataset.dir = i % 2 === 0 ? 'left' : 'right';
-    });
-    document.querySelectorAll('.citem').forEach(el => el.classList.add('scroll-in'));
-
-    const scrollObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const dir = e.target.dataset.dir;
-          if (dir === 'left') e.target.classList.add('vis', 'vis-left');
-          else if (dir === 'right') e.target.classList.add('vis', 'vis-right');
-          else e.target.classList.add('vis');
-          scrollObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.scroll-in').forEach(el => scrollObs.observe(el));
-
-    // === TAP RIPPLE EFFECT ===
-    document.querySelectorAll('.prod, .pcard, .cbtn, .qbtn, .chdr').forEach(el => {
-      el.classList.add('ripple');
-      el.addEventListener('pointerdown', (e) => {
-        const rect = el.getBoundingClientRect();
-        el.style.setProperty('--x', ((e.clientX - rect.left) / rect.width * 100) + '%');
-        el.style.setProperty('--y', ((e.clientY - rect.top) / rect.height * 100) + '%');
-      });
-    });
-
-    // === PARALLAX HEADER ON SCROLL ===
-    const hdr = document.querySelector('.hdr');
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          if (scrollY < 300) {
-            hdr.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
-            hdr.style.opacity = Math.max(0.4, 1 - scrollY / 400);
-          }
-          ticking = false;
-        });
-        ticking = true;
+    // Add confetti to CTA clicks
+    document.addEventListener('click',e=>{
+      if(e.target.closest('.confetti-trigger')){
+        createConfetti(e.clientX,e.clientY);
       }
     });
+
+    // Copy Code Function
+    function copyCode(el,code){
+      navigator.clipboard.writeText(code).then(()=>{
+        el.classList.add('copied');
+        el.querySelector('span').textContent='تم النسخ! ✓';
+        setTimeout(()=>{
+          el.classList.remove('copied');
+          el.querySelector('span').textContent='كود: '+code;
+        },2000);
+      });
+    }
   </script>
 </body>
 </html>
