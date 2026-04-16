@@ -49,6 +49,7 @@ header{padding:22px 0 18px;display:flex;align-items:center;justify-content:space
 
 /* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:16px;}
+#cal-modal,#numpad-modal{z-index:10001!important;}
 .modal-ov.open{display:flex;}
 .modal{background:var(--card2);border:1px solid var(--border);border-radius:18px;padding:24px;max-width:480px;width:100%;max-height:88vh;overflow-y:auto;}
 .modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
@@ -483,7 +484,7 @@ canvas{max-width:100%;}
   <div class="ob-card">
     <div class="ob-dots">
       <div class="ob-dot on" id="ob-d0"></div><div class="ob-dot" id="ob-d1"></div>
-      <div class="ob-dot" id="ob-d2"></div><div class="ob-dot" id="ob-d3"></div>
+      <div class="ob-dot" id="ob-d2"></div><div class="ob-dot" id="ob-d3"></div><div class="ob-dot" id="ob-d4"></div>
     </div>
     <div id="ob-body"></div>
   </div>
@@ -703,7 +704,7 @@ canvas{max-width:100%;}
     <div class="sum-card gc"><div class="s-icon">💵</div><div class="s-label" id="lbl-inc">إجمالي الدخل</div><div class="s-val gd" id="ov-income">0</div><div class="s-sub" id="ov-inc-cnt">0</div></div>
     <div class="sum-card"><div class="s-icon">📤</div><div class="s-label" id="lbl-exp">المصروفات</div><div class="s-val r" id="ov-expenses">0</div><div class="s-sub" id="ov-exp-cnt">0</div></div>
     <div class="sum-card"><div class="s-icon">💎</div><div class="s-label" id="lbl-bal">الرصيد</div><div class="s-val g" id="ov-balance">0</div><div class="s-sub" id="ov-sav-rate">0%</div></div>
-    <div class="sum-card"><div class="s-icon">🏦</div><div class="s-label">صافي الثروة</div><div class="s-val" id="ov-networth" style="color:var(--gold)">0</div><div class="s-sub">الأصول - الديون</div></div>
+    <div class="sum-card"><div class="s-icon">🏦</div><div class="s-label" id="lbl-networth">صافي الثروة</div><div class="s-val" id="ov-networth" style="color:var(--gold)">0</div><div class="s-sub" id="lbl-networth-sub">الأصول - الديون</div></div>
     <div class="sum-card"><div class="s-icon">💳</div><div class="s-label" id="lbl-debt-sum">إجمالي الديون</div><div class="s-val b" id="ov-debt">0</div><div class="s-sub" id="ov-debt-sub">0</div></div>
   </div>
   <div style="display:flex;justify-content:flex-end;margin-bottom:10px;gap:8px">
@@ -1148,12 +1149,12 @@ canvas{max-width:100%;}
     <div style="border-top:1px solid var(--border2);padding-top:14px">
       <div style="font-size:13px;font-weight:700;color:var(--gold2);margin-bottom:10px" id="lbl-add-account">➕ إضافة حساب</div>
       <div class="frow">
-        <div class="fg"><label class="fl">الاسم</label><input class="fi" id="acc-name" type="text" placeholder="الراجحي · STC Pay · نقدي"></div>
-        <div class="fg"><label class="fl">أيقونة</label>
+        <div class="fg"><label class="fl" id="lbl-acc-name">الاسم</label><input class="fi" id="acc-name" type="text" placeholder="Cash · Bank · Wallet"></div>
+        <div class="fg"><label class="fl" id="lbl-acc-icon">أيقونة</label>
           <select class="fs" id="acc-icon">
-            <option value="💵">💵 نقدي</option><option value="🏦">🏦 بنك</option>
-            <option value="💳">💳 بطاقة</option><option value="📱">📱 محفظة</option>
-            <option value="💰">💰 مدخرات</option><option value="🪙">🪙 استثمار</option>
+            <option value="💵" id="acc-ico-cash">💵 نقدي</option><option value="🏦" id="acc-ico-bank">🏦 بنك</option>
+            <option value="💳" id="acc-ico-card">💳 بطاقة</option><option value="📱" id="acc-ico-wallet">📱 محفظة</option>
+            <option value="💰" id="acc-ico-savings">💰 مدخرات</option><option value="🪙" id="acc-ico-invest">🪙 استثمار</option>
           </select>
         </div>
       </div>
@@ -1464,6 +1465,7 @@ function applyLang(){
   sl('btn-apply-cust',t.apply);sl('lbl-alloc',t.alloc);sl('lbl-actual-sp',t.actualSp);sl('lbl-choose-sys',t.chooseSys);
   sl('lbl-add-tx',t.addTx);sl('lbl-type',t.typeL);sl('lbl-amount',t.amtL);sl('lbl-desc',t.descL);sl('lbl-cat',t.catL);sl('lbl-date',t.dateL);sl('lbl-all-tx',t.allTx);
   sl('opt-inc',t.incOpt);sl('opt-exp',t.expOpt);sl('ropt-inc',t.incOpt);sl('ropt-exp',t.expOpt);
+  sl('opt-transfer',S.lang==='ar'?'🔄 تحويل':S.lang==='fr'?'🔄 Virement':'🔄 Transfer');
   sl('lbl-pie-ttl',t.pieT);sl('lbl-bar-ttl',t.barT);sl('lbl-cmp-ttl',t.cmpT);
   sl('sc-title',t.healthScore);sl('lbl-sp-pat',t.spPat);sl('lbl-recs',t.recsLabel);
   sl('lbl-add-goal',t.addGoal);
@@ -1579,6 +1581,38 @@ function applyLang(){
   const gni=document.getElementById('goal-name');if(gni)gni.placeholder=S.lang==='ar'?'سيارة·سفر·طوارئ':S.lang==='fr'?'Voiture·Voyage':'Car·Trip·Emergency';
   const dni=document.getElementById('debt-name');if(dni)dni.placeholder=S.lang==='ar'?'سيارة·بنك·بطاقة':S.lang==='fr'?'Voiture·Banque':'Car·Bank·Card';
   const rni=document.getElementById('rem-name');if(rni)rni.placeholder=S.lang==='ar'?'كهرباء·إيجار·هاتف':S.lang==='fr'?'Électricité·Loyer':'Electricity·Rent';
+  // Net worth card labels
+  sl('lbl-networth',S.lang==='ar'?'صافي الثروة':S.lang==='fr'?'Valeur Nette':'Net Worth');
+  sl('lbl-networth-sub',S.lang==='ar'?'الأصول - الديون':S.lang==='fr'?'Actifs - Dettes':'Assets - Debts');
+  // Accounts tab
+  var _accTab=document.getElementById('tab-accounts');if(_accTab){var _ats=_accTab.querySelector('.tl');if(_ats)_ats.textContent=S.lang==='ar'?'الحسابات':S.lang==='fr'?'Comptes':'Accounts';}
+  // Account form labels + icon options + placeholder
+  sl('lbl-acc-name',S.lang==='ar'?'الاسم':S.lang==='fr'?'Nom':'Name');
+  sl('lbl-acc-icon',S.lang==='ar'?'أيقونة':S.lang==='fr'?'Icône':'Icon');
+  var _acn=document.getElementById('acc-name');
+  if(_acn)_acn.placeholder=S.lang==='ar'?'نقدي · بنك · محفظة':S.lang==='fr'?'Espèces · Banque · Portefeuille':'Cash · Bank · Wallet';
+  var _icoMap={
+    'acc-ico-cash':{ar:'💵 نقدي',en:'💵 Cash',fr:'💵 Espèces'},
+    'acc-ico-bank':{ar:'🏦 بنك',en:'🏦 Bank',fr:'🏦 Banque'},
+    'acc-ico-card':{ar:'💳 بطاقة',en:'💳 Card',fr:'💳 Carte'},
+    'acc-ico-wallet':{ar:'📱 محفظة',en:'📱 Wallet',fr:'📱 Portefeuille'},
+    'acc-ico-savings':{ar:'💰 مدخرات',en:'💰 Savings',fr:'💰 Épargne'},
+    'acc-ico-invest':{ar:'🪙 استثمار',en:'🪙 Investment',fr:'🪙 Investissement'}
+  };
+  Object.keys(_icoMap).forEach(function(id){var o=document.getElementById(id);if(o)o.textContent=_icoMap[id][S.lang]||_icoMap[id].ar;});
+  // Tx page: search placeholder, type filter, all-categories filter
+  var _ts=document.getElementById('tx-search');
+  if(_ts)_ts.placeholder=S.lang==='ar'?'🔍 بحث...':S.lang==='fr'?'🔍 Rechercher...':'🔍 Search...';
+  sl('tx-filter-all',S.lang==='ar'?'كل الأنواع':S.lang==='fr'?'Tous les types':'All types');
+  sl('tx-filter-inc',S.lang==='ar'?'💵 دخل':S.lang==='fr'?'💵 Revenu':'💵 Income');
+  sl('tx-filter-exp',S.lang==='ar'?'💸 مصروف':S.lang==='fr'?'💸 Dépense':'💸 Expense');
+  sl('tx-filter-xfer',S.lang==='ar'?'🔄 تحويل':S.lang==='fr'?'🔄 Virement':'🔄 Transfer');
+  sl('tx-filter-all-cat',S.lang==='ar'?'كل الفئات':S.lang==='fr'?'Toutes les catégories':'All categories');
+  sl('tx-all-btn',S.lang==='ar'?'الكل':S.lang==='fr'?'Tout':'All');
+  // Recurring rec form translation (often missed)
+  sl('lbl-rec-day',t.recDay||(S.lang==='ar'?'يوم الشهر':S.lang==='fr'?'Jour du mois':'Day of month'));
+  // Refresh transaction list so cat dropdown gets repopulated with current language labels
+  if(typeof renderTxList==='function'){try{renderTxList();}catch(e){}}
 }
 function renderCatSelect(){
   const t=tr();
@@ -3211,67 +3245,101 @@ document.getElementById('gate-inp').addEventListener('keydown', function(e) {
 
 <script>
 // ═══ ONBOARDING ═══
-var _OBK='mali_ob_v1',_obStep=0,_obLang='ar',_obIncome=0,_obSys='50-30-20';
+var _OBK='mali_ob_v1',_obStep=0,_obLang='ar',_obCurrency='AED',_obIncome=0,_obSys='50-30-20';
 var _OB_SYS=[
-  {id:'50-30-20',r:'50/30/20',ar:'القاعدة الذهبية',en:'Golden Rule'},
-  {id:'70-10-10-10',r:'70/10/10/10',ar:'نظام الأرباع',en:'Four Quarters'},
-  {id:'60-20-20',r:'60/20/20',ar:'المتوازن',en:'Balanced'},
-  {id:'custom',r:'✏️',ar:'مخصص',en:'Custom'}
+  {id:'50-30-20',r:'50/30/20',ar:'القاعدة الذهبية',en:'Golden Rule',fr:'Règle d\'or'},
+  {id:'70-10-10-10',r:'70/10/10/10',ar:'نظام الأرباع',en:'Four Quarters',fr:'Quatre Quarts'},
+  {id:'60-20-20',r:'60/20/20',ar:'المتوازن',en:'Balanced',fr:'Équilibré'},
+  {id:'custom',r:'✏️',ar:'مخصص',en:'Custom',fr:'Personnalisé'}
+];
+var _OB_CURS=[
+  {code:'AED',flag:'🇦🇪',ar:'درهم إماراتي',en:'UAE Dirham',fr:'Dirham EAU'},
+  {code:'SAR',flag:'🇸🇦',ar:'ريال سعودي',en:'Saudi Riyal',fr:'Riyal saoudien'},
+  {code:'USD',flag:'🇺🇸',ar:'دولار أمريكي',en:'US Dollar',fr:'Dollar US'},
+  {code:'EUR',flag:'🇪🇺',ar:'يورو',en:'Euro',fr:'Euro'},
+  {code:'GBP',flag:'🇬🇧',ar:'جنيه إسترليني',en:'British Pound',fr:'Livre sterling'},
+  {code:'EGP',flag:'🇪🇬',ar:'جنيه مصري',en:'Egyptian Pound',fr:'Livre égyptienne'},
+  {code:'KWD',flag:'🇰🇼',ar:'دينار كويتي',en:'Kuwaiti Dinar',fr:'Dinar koweïtien'},
+  {code:'QAR',flag:'🇶🇦',ar:'ريال قطري',en:'Qatari Riyal',fr:'Riyal qatari'},
+  {code:'BHD',flag:'🇧🇭',ar:'دينار بحريني',en:'Bahraini Dinar',fr:'Dinar bahreïni'},
+  {code:'OMR',flag:'🇴🇲',ar:'ريال عماني',en:'Omani Rial',fr:'Rial omanais'},
+  {code:'MAD',flag:'🇲🇦',ar:'درهم مغربي',en:'Moroccan Dirham',fr:'Dirham marocain'},
+  {code:'TND',flag:'🇹🇳',ar:'دينار تونسي',en:'Tunisian Dinar',fr:'Dinar tunisien'},
+  {code:'JOD',flag:'🇯🇴',ar:'دينار أردني',en:'Jordanian Dinar',fr:'Dinar jordanien'},
+  {code:'INR',flag:'🇮🇳',ar:'روبية هندية',en:'Indian Rupee',fr:'Roupie indienne'},
+  {code:'TRY',flag:'🇹🇷',ar:'ليرة تركية',en:'Turkish Lira',fr:'Livre turque'}
 ];
 function obRender(){
-  var T=function(a,e){return _obLang==='ar'?a:e;};
-  for(var i=0;i<4;i++){var d=document.getElementById('ob-d'+i);if(d)d.className='ob-dot'+(i===_obStep?' on':'');}
+  var T=function(a,e,f){return _obLang==='ar'?a:_obLang==='fr'?(f||e):e;};
+  for(var i=0;i<5;i++){var d=document.getElementById('ob-d'+i);if(d)d.className='ob-dot'+(i===_obStep?' on':'');}
   var html='';
   if(_obStep===0){
-    html='<div class="ob-step-ico">👋</div><div class="ob-step-ttl">'+T('مرحباً بك في مالي!','Welcome to Mali!')+'</div>'
-      +'<div class="ob-step-desc">'+T('أداة إدارة المال الذكية. اضبطها في دقيقتين.','Smart money tool. Set it up in 2 minutes.')+'</div>'
+    html='<div class="ob-step-ico">👋</div><div class="ob-step-ttl">'+T('مرحباً بك في مالي!','Welcome to Mali!','Bienvenue sur Mali!')+'</div>'
+      +'<div class="ob-step-desc">'+T('أداة إدارة المال الذكية. اضبطها في دقيقتين.','Smart money tool. Set it up in 2 minutes.','Outil financier intelligent. Configurez-le en 2 minutes.')+'</div>'
       +'<div class="ob-lang-row">'
       +'<button class="ob-lang-btn'+(_obLang==='ar'?' sel':'')+'" data-l="ar" onclick="obSetLang(this.dataset.l)"><div style="font-size:24px">🇸🇦</div><div style="font-size:12px">العربية</div></button>'
       +'<button class="ob-lang-btn'+(_obLang==='en'?' sel':'')+'" data-l="en" onclick="obSetLang(this.dataset.l)"><div style="font-size:24px">🇺🇸</div><div style="font-size:12px">English</div></button>'
       +'<button class="ob-lang-btn'+(_obLang==='fr'?' sel':'')+'" data-l="fr" onclick="obSetLang(this.dataset.l)"><div style="font-size:24px">🇫🇷</div><div style="font-size:12px">Français</div></button>'
       +'</div>'
-      +'<button class="ob-next-btn" onclick="obNext()">'+T('التالي ←','Next →')+'</button>';
+      +'<button class="ob-next-btn" onclick="obNext()">'+T('التالي ←','Next →','Suivant →')+'</button>';
   }else if(_obStep===1){
-    html='<div class="ob-step-ico">💵</div><div class="ob-step-ttl">'+T('معلوماتك المالية','Your Finances')+'</div>'
-      +'<div class="ob-step-desc">'+T('الدخل الشهري الصافي','Net monthly income')+'</div>'
-      +'<input class="ob-inp" type="number" id="ob-inc" placeholder="10000" value="'+(_obIncome||'')+'" style="margin-bottom:8px">'
-      +'<div class="ob-step-desc" style="font-size:12px;margin-bottom:6px">'+T('مدخراتك الحالية (اختياري)','Current savings (optional)')+'</div>'
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">'
-      +'<input class="ob-inp" type="number" id="ob-cash" placeholder="'+T('نقدي','Cash')+'" style="margin:0">'
-      +'<input class="ob-inp" type="number" id="ob-bank" placeholder="'+T('بنك','Bank')+'" style="margin:0">'
-      +'</div>'
-      +'<button class="ob-next-btn" onclick="obNextStep1()">'+T('التالي ←','Next →')+'</button>'
-      +'<button class="ob-skip-btn" onclick="obNext()">'+T('تخطي','Skip')+'</button>';
+    html='<div class="ob-step-ico">🌍</div><div class="ob-step-ttl">'+T('اختر عملتك','Choose Your Currency','Choisissez votre devise')+'</div>'
+      +'<div class="ob-step-desc">'+T('يمكنك تغييرها لاحقاً','You can change this anytime','Vous pouvez modifier plus tard')+'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;max-height:240px;overflow-y:auto;padding:4px">';
+    for(var ci=0;ci<_OB_CURS.length;ci++){
+      var oc=_OB_CURS[ci];
+      var sel=_obCurrency===oc.code;
+      html+='<button style="display:flex;flex-direction:column;align-items:center;padding:10px 4px;border-radius:10px;border:2px solid '+(sel?'var(--gold)':'rgba(255,255,255,.08)')+';background:'+(sel?'rgba(201,168,76,.12)':'rgba(255,255,255,.03)')+';cursor:pointer;transition:all .2s" onclick="obSetCur(\''+oc.code+'\')">'
+        +'<div style="font-size:22px;margin-bottom:2px">'+oc.flag+'</div>'
+        +'<div style="font-size:11px;font-weight:700;color:'+(sel?'var(--gold)':'var(--text)')+'">'+oc.code+'</div>'
+        +'<div style="font-size:9px;color:var(--muted)">'+(_obLang==='ar'?oc.ar:_obLang==='fr'?oc.fr:oc.en)+'</div>'
+        +'</button>';
+    }
+    html+='</div>'
+      +'<button class="ob-next-btn" onclick="obNext()" style="margin-top:10px">'+T('التالي ←','Next →','Suivant →')+'</button>';
   }else if(_obStep===2){
-    html='<div class="ob-step-ico">🧮</div><div class="ob-step-ttl">'+T('نظام الميزانية','Budget System')+'</div>'
-      +'<div class="ob-step-desc">'+T('يمكنك تغييره لاحقاً','You can change this anytime')+'</div>'
+    html='<div class="ob-step-ico">💵</div><div class="ob-step-ttl">'+T('معلوماتك المالية','Your Finances','Vos finances')+'</div>'
+      +'<div class="ob-step-desc">'+T('الدخل الشهري الصافي','Net monthly income','Revenu mensuel net')+'</div>'
+      +'<input class="ob-inp" type="number" id="ob-inc" placeholder="10000" value="'+(_obIncome||'')+'" style="margin-bottom:8px">'
+      +'<div class="ob-step-desc" style="font-size:12px;margin-bottom:6px">'+T('مدخراتك الحالية (اختياري)','Current savings (optional)','Épargne actuelle (optionnel)')+'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">'
+      +'<input class="ob-inp" type="number" id="ob-cash" placeholder="'+T('نقدي','Cash','Espèces')+'" style="margin:0">'
+      +'<input class="ob-inp" type="number" id="ob-bank" placeholder="'+T('بنك','Bank','Banque')+'" style="margin:0">'
+      +'</div>'
+      +'<button class="ob-next-btn" onclick="obNextStep1()">'+T('التالي ←','Next →','Suivant →')+'</button>'
+      +'<button class="ob-skip-btn" onclick="obNext()">'+T('تخطي','Skip','Passer')+'</button>';
+  }else if(_obStep===3){
+    html='<div class="ob-step-ico">🧮</div><div class="ob-step-ttl">'+T('نظام الميزانية','Budget System','Système budgétaire')+'</div>'
+      +'<div class="ob-step-desc">'+T('يمكنك تغييره لاحقاً','You can change this anytime','Vous pouvez modifier plus tard')+'</div>'
       +'<div class="ob-sys-row">';
     for(var si=0;si<_OB_SYS.length;si++){
       var s=_OB_SYS[si];
       html+='<button class="ob-sys-btn'+(_obSys===s.id?' sel':'')+'" data-sid="'+s.id+'" onclick="obSetSys(this.dataset.sid)">'
         +'<div style="font-size:13px;font-weight:800;color:var(--gold)">'+s.r+'</div>'
-        +'<div style="font-size:11px;margin-top:3px">'+(_obLang==='ar'?s.ar:s.en)+'</div></button>';
+        +'<div style="font-size:11px;margin-top:3px">'+(_obLang==='ar'?s.ar:_obLang==='fr'?(s.fr||s.en):s.en)+'</div></button>';
     }
     html+='</div>'
-      +'<button class="ob-next-btn" onclick="obNext()">'+T('التالي ←','Next →')+'</button>'
-      +'<button class="ob-skip-btn" onclick="obNext()">'+T('تخطي','Skip')+'</button>';
+      +'<button class="ob-next-btn" onclick="obNext()">'+T('التالي ←','Next →','Suivant →')+'</button>'
+      +'<button class="ob-skip-btn" onclick="obNext()">'+T('تخطي','Skip','Passer')+'</button>';
   }else{
-    html='<div class="ob-step-ico">🎉</div><div class="ob-step-ttl">'+T('أنت جاهز!','All Set!')+'</div>'
-      +'<div class="ob-step-desc">'+T('تم ضبط مالي. يمكنك تعديل كل شيء لاحقاً.','Mali is set up. You can edit everything later.')+'</div>'
-      +'<button class="ob-next-btn" onclick="obFinish()">'+T('ابدأ الآن 🚀','Start Now 🚀')+'</button>';
+    html='<div class="ob-step-ico">🎉</div><div class="ob-step-ttl">'+T('أنت جاهز!','All Set!','Tout est prêt!')+'</div>'
+      +'<div class="ob-step-desc">'+T('تم ضبط مالي. يمكنك تعديل كل شيء لاحقاً.','Mali is set up. You can edit everything later.','Mali est configuré. Vous pouvez tout modifier plus tard.')+'</div>'
+      +'<button class="ob-next-btn" onclick="obFinish()">'+T('ابدأ الآن 🚀','Start Now 🚀','Commencer 🚀')+'</button>';
   }
   var el=document.getElementById('ob-body');if(el)el.innerHTML=html;
-  if(_obStep===1){var inp=document.getElementById('ob-inc');if(inp)inp.focus();}
+  if(_obStep===2){var inp=document.getElementById('ob-inc');if(inp)inp.focus();}
 }
 function obSetLang(l){_obLang=l;obRender();}
+function obSetCur(c){_obCurrency=c;obRender();}
 function obSetSys(id){_obSys=id;obRender();}
 function obNext(){
-  if(_obStep===1){var v=parseFloat((document.getElementById('ob-inc')||{value:0}).value)||0;if(v>0)_obIncome=v;}
-  _obStep=Math.min(_obStep+1,3);obRender();
+  if(_obStep===2){var v=parseFloat((document.getElementById('ob-inc')||{value:0}).value)||0;if(v>0)_obIncome=v;}
+  _obStep=Math.min(_obStep+1,4);obRender();
 }
 function obFinish(){
   var el=document.getElementById('onboard');if(el)el.classList.add('hidden');
   S.lang=_obLang;
+  S.currency=_obCurrency;
   if(_obIncome>0){S.targetIncome=_obIncome;var ti=document.getElementById('target-income');if(ti)ti.value=_obIncome.toLocaleString();}
   if(_obSys&&_obSys!=='custom'){
     var sys=BSYS.find(function(s2){return s2.id===_obSys;});
@@ -3874,7 +3942,7 @@ function renderTxList(){
     var catList=Object.keys(cats).sort();
     var allCatLbl=S.lang==='ar'?'كل الفئات':S.lang==='fr'?'Toutes les catégories':'All categories';
     cEl.innerHTML='<option value="" id="tx-filter-all-cat">'+allCatLbl+'</option>'
-      +catList.map(function(c){return '<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===fcat?' selected':'')+'>'+c+'</option>';}).join('');
+      +catList.map(function(c){return '<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===fcat?' selected':'')+'>'+(typeof trCat==='function'?trCat(c):c)+'</option>';}).join('');
   }
   if(q||ftype||fcat){
     txList=txList.filter(function(tx){
@@ -4367,11 +4435,11 @@ function obNextStep1(){
     if(!S.accounts) S.accounts=[];
     var L = _obLang;
     S.accounts = [
-      {id:1, name:L==='ar'?'النقدي':'Cash', icon:'💵', color:'#c9a84c', balance:cash},
-      {id:2, name:L==='ar'?'البنك':'Bank',  icon:'🏦', color:'#60a5fa', balance:bank}
+      {id:1, name:L==='ar'?'النقدي':L==='fr'?'Espèces':'Cash', icon:'💵', color:'#c9a84c', balance:cash},
+      {id:2, name:L==='ar'?'البنك':L==='fr'?'Banque':'Bank',  icon:'🏦', color:'#60a5fa', balance:bank}
     ];
   }
-  _obStep = Math.min(_obStep+1, 3);
+  _obStep = Math.min(_obStep+1, 4);
   obRender();
 }
 
@@ -4549,8 +4617,8 @@ function setDebtType(type){
       <select class="fs" id="edit-tx-acc-to"></select>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
-      <button onclick="closeEditTx()" style="padding:12px;border-radius:11px;border:1px solid var(--border2);background:var(--card2);color:var(--text);cursor:pointer;font-family:inherit;font-size:13px">إلغاء</button>
-      <button onclick="saveEditTx()" style="padding:12px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b0f1a;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700">💾 حفظ</button>
+      <button id="edit-btn-cancel" onclick="closeEditTx()" style="padding:12px;border-radius:11px;border:1px solid var(--border2);background:var(--card2);color:var(--text);cursor:pointer;font-family:inherit;font-size:13px">إلغاء</button>
+      <button id="edit-btn-save" onclick="saveEditTx()" style="padding:12px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b0f1a;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700">💾 حفظ</button>
     </div>
   </div>
 </div>
@@ -4566,7 +4634,23 @@ function openEditTx(id){
   if(!tx) return;
   _editTxId = id;
   var L = S.lang;
-  document.getElementById('edit-tx-title').textContent = L==='ar'?'تعديل المعاملة':L==='fr'?'Modifier':'Edit Transaction';
+  document.getElementById('edit-tx-title').textContent = L==='ar'?'تعديل المعاملة':L==='fr'?'Modifier la transaction':'Edit Transaction';
+  // Translate form labels
+  var _sl2=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  _sl2('edit-lbl-type',L==='ar'?'النوع':L==='fr'?'Type':'Type');
+  _sl2('edit-lbl-amt',L==='ar'?'المبلغ':L==='fr'?'Montant':'Amount');
+  _sl2('edit-lbl-desc',L==='ar'?'الوصف':L==='fr'?'Description':'Description');
+  _sl2('edit-lbl-cat',L==='ar'?'الفئة':L==='fr'?'Catégorie':'Category');
+  _sl2('edit-lbl-date',L==='ar'?'التاريخ':L==='fr'?'Date':'Date');
+  _sl2('edit-lbl-acc',L==='ar'?'الحساب':L==='fr'?'Compte':'Account');
+  _sl2('edit-btn-save',L==='ar'?'💾 حفظ':L==='fr'?'💾 Sauvegarder':'💾 Save');
+  _sl2('edit-btn-cancel',L==='ar'?'إلغاء':L==='fr'?'Annuler':'Cancel');
+  // Translate type dropdown options
+  var _tOpts=document.getElementById('edit-tx-type');
+  if(_tOpts&&_tOpts.options){
+    var _tMap={income:{ar:'💵 دخل',en:'💵 Income',fr:'💵 Revenu'},expense:{ar:'💸 مصروف',en:'💸 Expense',fr:'💸 Dépense'},transfer:{ar:'🔄 تحويل',en:'🔄 Transfer',fr:'🔄 Virement'}};
+    for(var oi=0;oi<_tOpts.options.length;oi++){var _o=_tOpts.options[oi];if(_tMap[_o.value])_o.textContent=_tMap[_o.value][L]||_tMap[_o.value].ar;}
+  }
   var typeEl = document.getElementById('edit-tx-type');
   typeEl.value = tx.type||'expense';
   var amtEl = document.getElementById('edit-tx-amt');
