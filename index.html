@@ -31,6 +31,8 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',Inter,sans-serif;min-height:100vh;overflow-x:hidden;}
+.cur-sym-svg{display:inline-flex;align-items:center;justify-content:center;width:0.85em;height:0.85em;vertical-align:-0.08em;margin:0 1px;}
+.cur-sym-svg svg{width:100%;height:100%;display:block;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(201,168,76,.05) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 80%,rgba(96,165,250,.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
 .app{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 18px 80px;}
 
@@ -708,11 +710,21 @@ canvas{max-width:100%;}
   <button onclick="showReport()" style="background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:7px 14px;color:var(--gold2);font-family:inherit;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px">
     📊 <span id="lbl-quick-report">تقرير الشهر</span>
   </button>
-  <button onclick="openBackupModal()" style="background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:7px 14px;color:var(--muted);font-family:inherit;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px">
-    💾 <span id="lbl-quick-backup">نسخة احتياطية</span>
-  </button>
 </div>
 <div id="ov-alerts" class="alerts-panel"></div>
+  <!-- ═══ NET WORTH TREND CHART ═══ -->
+  <div class="sc mb14" id="nw-chart-card" style="display:none">
+    <div class="sc-ttl" style="justify-content:space-between">
+      <span><span>📈</span> <span id="lbl-nw-chart">تطور صافي الثروة</span></span>
+      <div style="display:flex;gap:4px">
+        <button id="nw-range-6" onclick="setNwRange(6)" style="background:rgba(201,168,76,.2);border:1px solid var(--gold);border-radius:7px;padding:3px 9px;color:var(--gold);cursor:pointer;font-family:inherit;font-size:10px;font-weight:700">6M</button>
+        <button id="nw-range-12" onclick="setNwRange(12)" style="background:var(--card2);border:1px solid var(--border2);border-radius:7px;padding:3px 9px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:10px">12M</button>
+        <button id="nw-range-all" onclick="setNwRange(0)" style="background:var(--card2);border:1px solid var(--border2);border-radius:7px;padding:3px 9px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:10px" id="nw-range-all-lbl">الكل</button>
+      </div>
+    </div>
+    <canvas id="nw-canvas" width="600" height="180" style="width:100%;border-radius:8px"></canvas>
+    <div id="nw-summary" style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border2)"></div>
+  </div>
   <div class="two-col mb14">
     <div class="sc">
       <div class="sc-ttl"><span>📈</span> <span id="lbl-bud-use">استخدام الميزانية</span></div>
@@ -820,6 +832,20 @@ canvas{max-width:100%;}
         </div>
       </div>
       <div id="tx-month-summary"></div>
+      <!-- Search & filter bar -->
+      <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">
+        <input type="text" id="tx-search" placeholder="🔍 بحث..." oninput="renderTxList()" style="flex:2;min-width:120px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 10px;color:var(--text);font-family:inherit;font-size:12px;outline:none">
+        <select id="tx-filter-type" onchange="renderTxList()" style="flex:1;min-width:90px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 8px;color:var(--text);font-family:inherit;font-size:11px">
+          <option value="" id="tx-filter-all">كل الأنواع</option>
+          <option value="income" id="tx-filter-inc">💵 دخل</option>
+          <option value="expense" id="tx-filter-exp">💸 مصروف</option>
+          <option value="transfer" id="tx-filter-xfer">🔄 تحويل</option>
+        </select>
+        <select id="tx-filter-cat" onchange="renderTxList()" style="flex:1;min-width:90px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 8px;color:var(--text);font-family:inherit;font-size:11px">
+          <option value="" id="tx-filter-all-cat">كل الفئات</option>
+        </select>
+        <button onclick="clearTxFilters()" style="background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:11px" id="tx-filter-clear">✕</button>
+      </div>
       <div class="tx-list" id="all-tx"><div class="empty"><div class="empty-ico">📭</div>--</div></div>
     </div>
   </div>
@@ -853,7 +879,6 @@ canvas{max-width:100%;}
       </div>
       <div class="fg" style="margin-bottom:8px"><label class="fl" id="lbl-rec-start">تاريخ البدء (اختياري)</label><input class="fi" id="rec-start" type="text" readonly style="cursor:pointer;text-align:center" placeholder="YYYY-MM-DD" onclick="calOpen('rec-start')"></div>
       <div class="fg" style="margin-bottom:8px"><label class="fl" id="lbl-rec-acc">الحساب</label><select class="fs" id="rec-acc-sel"></select></div>
-      <div class="fg" style="margin-bottom:8px"><label class="fl" id="lbl-rec-start">تاريخ البدء (اختياري)</label><input class="fi" id="rec-start" type="text" readonly style="cursor:pointer;text-align:center" placeholder="YYYY-MM-DD" onclick="calOpen('rec-start')"></div>
       <button class="badd" id="btn-add-rec" onclick="addRecurring()">✚ إضافة</button>
     </div>
     <div class="sc">
@@ -880,7 +905,7 @@ canvas{max-width:100%;}
       <button class="badd" id="btn-add-rem" onclick="addReminder()">✚ إضافة</button>
     </div>
     <div class="sc">
-      <div class="sc-ttl"><span>🔔</span> <span id="lbl-my-rems">تذكيراتي</span></div>
+      <div class="sc-ttl" style="justify-content:space-between;flex-wrap:wrap;gap:6px"><span><span>🔔</span> <span id="lbl-my-rems">تذكيراتي</span></span><button id="notif-toggle-btn" onclick="toggleNotifs()" style="background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:5px 10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:10px;display:flex;align-items:center;gap:4px"><span id="notif-toggle-ico">🔕</span><span id="notif-toggle-lbl">تفعيل الإشعارات</span></button></div>
       <div id="rem-list"><div class="empty"><div class="empty-ico">🔔</div>--</div></div>
     </div>
   </div>
@@ -1069,6 +1094,12 @@ canvas{max-width:100%;}
         <div class="fg"><label class="fl" id="lbl-debt-months">عدد الأشهر</label><input class="fi" id="debt-months" type="text" readonly style="cursor:pointer;text-align:center;background:var(--card2)" placeholder="0" onclick="npOpen('debt-months','lbl-debt-months',false,'calcDebtPayment')"></div>
         <div class="fg"><label class="fl" id="lbl-debt-due">تاريخ أول قسط</label><input class="fi" id="debt-due" type="text" readonly style="cursor:pointer;text-align:center" placeholder="YYYY-MM-DD" onclick="calOpen('debt-due')"></div>
       </div>
+      <div class="fg" style="margin-bottom:8px"><label class="fl" id="lbl-debt-itype">نوع الفائدة</label>
+        <select class="fs" id="debt-itype" onchange="calcDebtPayment()">
+          <option value="reducing" id="debt-itype-opt-r">📉 متناقصة (Reducing Balance)</option>
+          <option value="flat" id="debt-itype-opt-f">📌 ثابتة (Flat Rate)</option>
+        </select>
+      </div>
       <!-- Auto-calculated payment preview -->
       <div id="debt-calc-preview" style="background:rgba(201,168,76,.07);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;display:none">
         <div style="font-size:10px;color:var(--muted);margin-bottom:8px;font-weight:600" id="lbl-debt-preview">معاينة القسط المحسوب</div>
@@ -1094,6 +1125,18 @@ canvas{max-width:100%;}
       <div class="sc-ttl"><span>💳</span> <span id="lbl-my-debts">ديوني وأقساطي</span></div>
       <div id="debts-list"><div class="empty"><div class="empty-ico">💳</div>--</div></div>
     </div>
+  </div>
+  <!-- ═══ DEBT STRATEGY (SNOWBALL vs AVALANCHE) ═══ -->
+  <div class="sc mb14" id="debt-strategy-card" style="display:none;margin-top:14px">
+    <div class="sc-ttl"><span>🎯</span> <span id="lbl-debt-strat">استراتيجية سداد الديون</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.7" id="lbl-debt-strat-desc">
+      قارن بين طريقتي سداد الديون عند توفر مبلغ إضافي شهرياً. اختر الأنسب لك.
+    </div>
+    <div class="fg" style="margin-bottom:12px">
+      <label class="fl" id="lbl-debt-extra">💰 المبلغ الإضافي الشهري (فوق الحد الأدنى)</label>
+      <input class="fi" id="debt-extra-pmt" type="text" readonly style="cursor:pointer;text-align:center;background:var(--card2)" placeholder="500" onclick="npOpen('debt-extra-pmt','lbl-debt-extra',false,'compareDebtStrategies')">
+    </div>
+    <div id="debt-strategy-result"></div>
   </div>
 </div>
 
@@ -1141,8 +1184,8 @@ function save(){try{localStorage.setItem('mali_v4',JSON.stringify(S));}catch(e){
 
 // ============ CURRENCIES ============
 const CURS=[
-  {code:'AED',symbol:'د.إ',name:'درهم إماراتي',flag:'🇦🇪'},
-  {code:'SAR',symbol:'ر.س',name:'ريال سعودي',flag:'🇸🇦'},
+  {code:'AED',symbol:'<span class="cur-sym-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 604 604"><path d="M300.6,493.0L363.0,482.3L418.0,455.2L456.1,414.0L478.0,359.7L524.0,359.8L541.7,369.0L539.4,346.0L529.0,329.4L513.0,321.8L484.4,320.0L484.6,283.0L522.0,282.8L541.0,293.1L538.3,266.0L529.9,254.0L516.0,245.6L478.2,244.0L462.3,202.0L440.2,170.0L408.0,142.8L374.0,125.9L339.0,115.7L297.0,110.7L141.0,110.5L157.2,156.0L158.0,244.0L118.0,244.3L101.0,234.6L100.7,241.0L103.8,260.0L116.0,276.4L129.0,282.3L158.0,284.0L157.0,321.3L117.0,320.5L100.7,312.0L103.6,336.0L115.0,352.2L130.0,359.1L158.0,360.0L156.2,457.0L139.8,493.0L300.6,493.0ZM412.0,244.2L217.0,244.3L216.3,130.0L307.0,131.6L353.0,146.8L373.0,161.3L392.2,185.0L404.2,211.0L412.0,244.2ZM416.0,321.2L217.0,321.2L216.2,284.0L416.0,282.9L416.0,321.2ZM274.0,474.0L216.3,474.0L216.3,360.0L412.5,360.0L395.3,412.0L369.0,444.5L329.0,466.2L274.0,474.0Z" fill="currentColor" fill-rule="evenodd"/></svg></span>',name:'درهم إماراتي',flag:'🇦🇪'},
+  {code:'SAR',symbol:'<span class="cur-sym-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 241"><path d="M4.0,220.0L73.0,205.4L81.0,201.5L100.2,175.0L101.3,142.0L105.0,140.7L126.4,137.0L127.0,187.3L206.4,170.0L213.0,143.7L150.9,156.0L151.6,131.0L206.0,119.4L213.3,93.0L150.9,105.0L151.0,15.0L141.0,20.6L126.4,35.0L126.1,111.0L102.0,116.4L101.0,2.4L88.0,10.7L76.8,22.0L76.4,121.0L21.0,133.4L13.5,159.0L76.0,147.1L76.4,179.0L9.0,193.6L2.7,213.0L1.6,220.0L4.0,220.0ZM127.7,238.0L206.0,221.4L213.3,195.0L134.0,211.5L127.7,229.0L127.7,238.0Z" fill="currentColor" fill-rule="evenodd"/></svg></span>',name:'ريال سعودي',flag:'🇸🇦'},
   {code:'KWD',symbol:'د.ك',name:'دينار كويتي',flag:'🇰🇼'},
   {code:'QAR',symbol:'ر.ق',name:'ريال قطري',flag:'🇶🇦'},
   {code:'BHD',symbol:'د.ب',name:'دينار بحريني',flag:'🇧🇭'},
@@ -1405,7 +1448,7 @@ function applyLang(){
   document.getElementById('h-app-name').textContent=t.appName;
   document.getElementById('h-app-sub').textContent=t.appSub;
   document.getElementById('lang-btn').textContent='🌐 '+(S.lang.toUpperCase());
-  document.getElementById('cur-btn').textContent='🌍 '+cur().symbol;
+  document.getElementById('cur-btn').innerHTML='🌍 '+cur().symbol;
   // Tabs
   const tabs=['overview','budget','transactions','charts','ai','savings','debts','recurring','reminders'];
   const labels=[t.overview,t.budget,t.transactions,t.charts,t.ai,t.savings,t.debts,t.recurring,t.reminders];
@@ -1431,6 +1474,11 @@ function applyLang(){
   sl('retire-early-btn',S.lang==='ar'?'-5 سنة':'-5 years');
   sl('retire-late-btn',S.lang==='ar'?'+5 سنة':'+5 years');sl('lbl-goal-nm',t.goalNm);sl('lbl-goal-tgt',t.goalTgt);sl('lbl-goal-ico',t.goalIco);sl('lbl-my-goals',t.myGoals);
   sl('lbl-add-debt',t.addDebt);sl('lbl-debt-nm',t.debtNm);sl('lbl-debt-tot',t.debtTot);sl('lbl-debt-rate',t.debtRate);sl('lbl-debt-months',t.debtMonths);sl('lbl-debt-paid',t.debtPaid);sl('lbl-debt-paid-periods',t.debtPaidPer);sl('lbl-debt-due',t.debtDue);sl('lbl-my-debts',t.myDebts);sl('lbl-debt-preview',t.debtPreview);sl('lbl-prev-pmt',t.prevPmt);sl('lbl-prev-int',t.prevInt);sl('lbl-prev-prin',t.prevPrin);sl('lbl-prev-total-int',t.prevTotalInt);sl('lbl-debt-paid-hint',t.debtPaidHint);
+  // Interest-type labels (added in patch)
+  var _itLbl=S.lang==='ar'?'نوع الفائدة':S.lang==='fr'?"Type d'Intérêt":'Interest Type';
+  var _itR=S.lang==='ar'?'📉 متناقصة (Reducing Balance)':S.lang==='fr'?'📉 Solde Dégressif':'📉 Reducing Balance';
+  var _itF=S.lang==='ar'?'📌 ثابتة (Flat Rate)':S.lang==='fr'?'📌 Taux Fixe':'📌 Flat Rate';
+  sl('lbl-debt-itype',_itLbl);sl('debt-itype-opt-r',_itR);sl('debt-itype-opt-f',_itF);
   sl('lbl-add-rec',t.addRec);sl('lbl-rec-day',t.recDay);sl('lbl-rec-freq',t.recFreq);sl('lbl-my-recs',t.myRecs);sl('lbl-apply-rec',t.applyRec);sl('btn-apply-rec',`⚡ ${t.applyRec}`);
   sl('lbl-rec-type',t.typeL);sl('lbl-rec-amt',t.amtL);sl('lbl-rec-desc',t.descL);sl('lbl-rec-cat',t.catL);sl('lbl-rec-freq',t.recFreq);sl('rfrq-m',t.monthly);sl('rfrq-y',t.yearly);
   sl('lbl-add-rem',t.addRem);sl('lbl-rem-nm',t.remNm);sl('lbl-rem-amt',t.remAmt);sl('lbl-rem-day',t.remDay);sl('lbl-my-rems',t.myRems);
@@ -1538,6 +1586,36 @@ function renderCatSelect(){
     const s=document.getElementById(id);if(!s)return;
     s.innerHTML=t.cats.map(c=>`<option value="${c}">${c}</option>`).join('');
   });
+}
+
+// Translate stored category to current language. User-customized strings pass through.
+function trCat(cat){
+  if(!cat)return cat;
+  var langs=['ar','en','fr'];
+  for(var i=0;i<langs.length;i++){
+    var arr=(TR[langs[i]]&&TR[langs[i]].cats)||[];
+    var idx=arr.indexOf(cat);
+    if(idx>=0){
+      var target=(TR[S.lang]&&TR[S.lang].cats)||arr;
+      return target[idx]||cat;
+    }
+  }
+  return cat;
+}
+
+// Translate default account names (Cash/Bank). Custom names pass through.
+function trAccName(name){
+  if(!name)return name;
+  var d={
+    'النقدي':{ar:'النقدي',en:'Cash',fr:'Espèces'},
+    'Cash':{ar:'النقدي',en:'Cash',fr:'Espèces'},
+    'Espèces':{ar:'النقدي',en:'Cash',fr:'Espèces'},
+    'البنك':{ar:'البنك',en:'Bank',fr:'Banque'},
+    'Bank':{ar:'البنك',en:'Bank',fr:'Banque'},
+    'Banque':{ar:'البنك',en:'Bank',fr:'Banque'}
+  };
+  var e=d[name];
+  return e?(e[S.lang]||name):name;
 }
 
 // ============ BUDGET SYSTEMS ============
@@ -1805,7 +1883,10 @@ function addTx(){
   const date=document.getElementById('tx-date').value||new Date().toISOString().slice(0,10);
   const accElTx=document.getElementById('tx-acc');const accId=accElTx?parseInt(accElTx.value)||1:1;
   if(!amount||amount<=0||!desc){notify(S.lang==='ar'?'⚠️ أدخل الوصف والمبلغ':'⚠️ Enter amount and description');return;}
-  // Handle transfer between accounts
+  // Block future dates
+  var _today=new Date().toISOString().slice(0,10);
+  if(date>_today){notify(S.lang==='ar'?'⚠️ لا يمكن إدخال معاملة بتاريخ مستقبلي':'⚠️ Future dates not allowed for transactions');return;}
+  // Handle transfer between accounts (single transaction with type='transfer')
   if(type==='transfer'){
     var toAccEl=document.getElementById('tx-acc-to');
     var toAccId=toAccEl?parseInt(toAccEl.value)||0:0;
@@ -1813,8 +1894,7 @@ function addTx(){
     var toAcc=(S.accounts||[]).find(function(a){return a.id===toAccId;});
     var fromAcc=(S.accounts||[]).find(function(a){return a.id===accId;});
     if(!toAcc||!fromAcc) return;
-    S.transactions.unshift({id:Date.now(),type:'expense',amount:amount,desc:'🔄 '+(S.lang==='ar'?'تحويل إلى':'Transfer to')+' '+toAcc.icon+' '+toAcc.name,cat:S.lang==='ar'?'📦 أخرى':'📦 Other',date:date,accountId:accId,isTransfer:true,transferTo:toAccId});
-    S.transactions.unshift({id:Date.now()+1,type:'income',amount:amount,desc:'🔄 '+(S.lang==='ar'?'تحويل من':'Transfer from')+' '+fromAcc.icon+' '+fromAcc.name,cat:S.lang==='ar'?'💼 راتب':'💼 Salary',date:date,accountId:toAccId,isTransfer:true,transferFrom:accId});
+    S.transactions.unshift({id:Date.now(),type:'transfer',amount:amount,desc:desc||('🔄 '+(S.lang==='ar'?'تحويل':'Transfer')+' '+fromAcc.name+' → '+toAcc.name),cat:cat,date:date,accountId:accId,transferTo:toAccId,isTransfer:true});
     save();render();
     document.getElementById('tx-amt').value='';if(document.getElementById('tx-amt').dataset)document.getElementById('tx-amt').dataset.raw='0';
     document.getElementById('tx-desc').value='';
@@ -1829,16 +1909,20 @@ function addTx(){
 }
 function delTx(id){S.transactions=S.transactions.filter(tx=>tx.id!==id);save();render();}
 function txCard(tx,showDel){
-  const isInc=tx.type==='income';const c=cur();
+  const isInc=tx.type==='income';const isXfer=tx.type==='transfer';const c=cur();
   const isRec=tx.recurring;
+  const sign=isInc?'+':isXfer?'':'-';
+  const amtClass=isInc?'inc':isXfer?'':'exp';
+  const amtColor=isXfer?'color:var(--gold2)':'';
+  const displayCat=trCat(tx.cat);
   return `<div class="tx-item">
-    <div class="tx-ico" style="background:${catColor(tx.cat)}22">${tx.cat.split(' ')[0]}</div>
-    <div class="tx-inf">
-      <div class="tx-nm">${isRec?'🔁 ':''} ${tx.desc}</div>
-      <div class="tx-ct">${tx.cat} · ${tx.date}</div>
+    <div class="tx-ico" style="background:${catColor(tx.cat)}22">${(displayCat||'').split(' ')[0]}</div>
+    <div class="tx-inf" onclick="openEditTx(${tx.id})" style="cursor:pointer;flex:1">
+      <div class="tx-nm">${isRec?'🔁 ':''}${isXfer?'🔄 ':''}${tx.desc}</div>
+      <div class="tx-ct">${displayCat} · ${tx.date}</div>
     </div>
-    <div class="tx-amt ${isInc?'inc':'exp'}">${isInc?'+':'-'}${tx.amount.toLocaleString()} ${c.symbol}</div>
-    ${showDel?`<button class="tx-del" onclick="delTx(${tx.id})">✕</button>`:''}
+    <div class="tx-amt ${amtClass}" style="${amtColor}">${sign}${tx.amount.toLocaleString()} ${c.symbol}</div>
+    ${showDel?`<button class="tx-edit" onclick="openEditTx(${tx.id})" style="background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gold);border-radius:7px;padding:4px 8px;font-size:11px;cursor:pointer;font-family:inherit;margin-right:4px">✏️</button><button class="tx-del" onclick="delTx(${tx.id})">✕</button>`:''}
   </div>`;
 }
 
@@ -1861,7 +1945,7 @@ function addFunds(goalId){
   var remaining=g.target-g.saved;
   if(remaining<=0){notify(S.lang==='ar'?'✅ تم تحقيق الهدف!':'✅ Goal reached!');return;}
   var c2=cur();
-  var accOpts=(S.accounts||[]).map(function(a){return '<option value="'+a.id+'"'+(a.id===g.accountId?' selected':'')+'>'+a.icon+' '+a.name+'</option>';}).join('');
+  var accOpts=(S.accounts||[]).map(function(a){return '<option value="'+a.id+'"'+(a.id===g.accountId?' selected':'')+'>'+a.icon+' '+trAccName(a.name)+'</option>';}).join('');
   var T=function(ar,en){return S.lang==='ar'?ar:en;};
   var today=new Date().toISOString().slice(0,10);
   var html='<div style="background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px">'
@@ -1904,7 +1988,14 @@ function delGoal(id){S.goals=S.goals.filter(g=>g.id!==id);save();render();}
 
 // Standard amortization: monthly payment = P * r / (1 - (1+r)^-n)
 // r = monthly rate = annualRate/12/100
-function calcMonthlyPayment(principal, annualRate, months){
+// interestType: 'reducing' (default) or 'flat'
+function calcMonthlyPayment(principal, annualRate, months, interestType){
+  if(months<=0) return 0;
+  if(interestType==='flat'){
+    // Flat rate: interest on original principal each month, principal paid evenly
+    var flatInt = principal * (annualRate/100) / 12;
+    return (principal/months) + flatInt;
+  }
   if(annualRate===0) return principal/months;
   const r = annualRate/12/100;
   return principal * r / (1 - Math.pow(1+r, -months));
@@ -1915,6 +2006,11 @@ function calcMonthlyPayment(principal, annualRate, months){
 function getNextSplit(d){
   const remaining = d.principal - d.principalPaid;
   if(remaining<=0) return {principalPart:0, interestPart:0};
+  if(d.interestType==='flat'){
+    var flatInt = d.principal * (d.annualRate/100) / 12;
+    var flatPrin = Math.min(d.principal/d.months, remaining);
+    return {principalPart: flatPrin, interestPart: flatInt};
+  }
   if(d.annualRate===0) return {principalPart:Math.min(d.monthlyPayment,remaining), interestPart:0};
   const r = d.annualRate/12/100;
   const interestPart = remaining * r;
@@ -1926,6 +2022,18 @@ function getNextSplit(d){
 function buildSchedule(d){
   const schedule = [];
   let balance = d.principal;
+  if(d.interestType==='flat'){
+    var flatInt = d.principal * (d.annualRate/100) / 12;
+    var flatPrin = d.principal / d.months;
+    var pmt = flatPrin + flatInt;
+    for(let i=1; i<=d.months; i++){
+      var p = Math.min(flatPrin, balance);
+      balance = Math.max(0, balance - p);
+      schedule.push({period:i, payment:pmt, interest:flatInt, principal:p, balance:balance});
+      if(balance<=0) break;
+    }
+    return schedule;
+  }
   const r = d.annualRate/12/100;
   for(let i=1; i<=d.months; i++){
     const interestPart = balance * r;
@@ -1941,17 +2049,26 @@ function calcDebtPayment(){
   const principal = parseFloat((document.getElementById('debt-total').dataset.raw||document.getElementById('debt-total').value||'0'))||0;
   const annualRate = parseFloat((document.getElementById('debt-rate').dataset.raw||document.getElementById('debt-rate').value||'0'))||0;
   const months = parseInt((document.getElementById('debt-months').dataset.raw||document.getElementById('debt-months').value||'0'))||0;
+  const itypeEl = document.getElementById('debt-itype');
+  const interestType = (itypeEl && itypeEl.value) || 'reducing';
   const prev = document.getElementById('debt-calc-preview');
   const c2 = (typeof cur==='function') ? cur() : {symbol:''};
   if(!principal||!months){if(prev)prev.style.display='none';return;}
-  const monthly = calcMonthlyPayment(principal, annualRate, months);
-  const r = annualRate/12/100;
-  const interestFirst = principal * r;
-  const principalFirst = monthly - interestFirst;
-  const totalInterest = (monthly * months) - principal;
+  const monthly = calcMonthlyPayment(principal, annualRate, months, interestType);
+  let interestFirst, principalFirst, totalInterest;
+  if(interestType==='flat'){
+    interestFirst = principal * (annualRate/100) / 12;
+    principalFirst = principal/months;
+    totalInterest = interestFirst * months;
+  } else {
+    const r = annualRate/12/100;
+    interestFirst = principal * r;
+    principalFirst = monthly - interestFirst;
+    totalInterest = (monthly * months) - principal;
+  }
   if(prev) prev.style.display='block';
   const c = c2.symbol||'';
-  const fmt = v => Math.round(v).toLocaleString()+' '+c;
+  const fmt = v => (v<10?v.toFixed(2):Math.round(v).toLocaleString())+' '+c;
   const el = id => document.getElementById(id);
   if(el('prev-payment'))   el('prev-payment').textContent   = fmt(monthly);
   if(el('prev-interest'))  el('prev-interest').textContent  = fmt(Math.max(0,interestFirst));
@@ -1968,20 +2085,22 @@ function addDebt(){
   const due=_ddv.length===10?parseInt(_ddv.split('-')[2])||1:parseInt(_ddv)||1;
   const paidAmt = parseFloat((document.getElementById('debt-paid').dataset.raw||document.getElementById('debt-paid').value||'0'))||0;
   const paidPeriods = parseInt((document.getElementById('debt-paid-periods').dataset.raw||document.getElementById('debt-paid-periods').value||'0'))||0;
+  const _itypeEl = document.getElementById('debt-itype');
+  const interestType = (_itypeEl && _itypeEl.value) || 'reducing';
   if(!name||!principal||!months){notify('⚠️');return;}
 
-  const monthlyPayment = calcMonthlyPayment(principal, annualRate, months);
+  const monthlyPayment = calcMonthlyPayment(principal, annualRate, months, interestType);
   // Reconstruct principalPaid from amortization schedule up to paidPeriods
   let principalPaid = 0; let interestPaid = 0;
   if(paidPeriods>0){
-    const sched = buildSchedule({principal,annualRate,months,monthlyPayment});
+    const sched = buildSchedule({principal,annualRate,months,monthlyPayment,interestType});
     for(let i=0;i<Math.min(paidPeriods,sched.length);i++){
       principalPaid += sched[i].principal;
       interestPaid  += sched[i].interest;
     }
   } else if(paidAmt>0){
     // If only a lump-sum paid amount is given, approximate from schedule
-    const sched = buildSchedule({principal,annualRate,months,monthlyPayment});
+    const sched = buildSchedule({principal,annualRate,months,monthlyPayment,interestType});
     let cumPaid=0;
     for(let i=0;i<sched.length;i++){
       cumPaid+=sched[i].payment;
@@ -1994,7 +2113,7 @@ function addDebt(){
   const cols=['#f87171','#fb923c','#a78bfa','#60a5fa','#f472b6'];
   const totalInterest = (monthlyPayment*months)-principal;
   S.debts.push({
-    id:Date.now(), name, principal, annualRate, months, monthlyPayment,
+    id:Date.now(), name, principal, annualRate, months, monthlyPayment, interestType,
     principalPaid: Math.min(principalPaid, principal),
     interestPaid:  interestPaid,
     periodsCompleted: paidPeriods,
@@ -2004,6 +2123,7 @@ function addDebt(){
   save();render();
   ['debt-name','debt-total','debt-rate','debt-months','debt-due','debt-paid','debt-paid-periods']
     .forEach(i=>{const e=document.getElementById(i);if(e)e.value='';});
+  var _it=document.getElementById('debt-itype'); if(_it) _it.value='reducing';
   document.getElementById('debt-calc-preview').style.display='none';
   notify('💳');
 }
@@ -2013,7 +2133,7 @@ function payDebt(id){
   var remaining=d.principal-d.principalPaid;
   if(remaining<=0){notify(S.lang==='ar'?'✅ مسدد بالكامل!':'✅ Fully paid!');return;}
   var c2=cur();var T=function(ar,en){return S.lang==='ar'?ar:en;};
-  var accOpts=(S.accounts||[]).map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+a.name+'</option>';}).join('');
+  var accOpts=(S.accounts||[]).map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>';}).join('');
   var pmt=Math.round(d.monthlyPayment);
   var html='<div style="background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px">'
     +'<div style="font-size:14px;font-weight:700">'+d.name+'</div>'
@@ -2090,7 +2210,7 @@ function applyRecurringOne(rid){
   var ym=S.currentMonth.split('-');
   var defaultDate=r.startDate||(ym[0]+'-'+ym[1]+'-'+String(r.day).padStart(2,'0'));
   var html='<div style="background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px">'
-    +'<div style="font-size:14px;font-weight:700">'+r.cat.split(' ')[0]+' '+r.desc+'</div>'
+    +'<div style="font-size:14px;font-weight:700">'+(trCat(r.cat)||'').split(' ')[0]+' '+r.desc+'</div>'
     +'<div style="font-size:20px;font-weight:800;color:'+(r.type==='income'?'var(--green)':'var(--red)')+';margin-top:4px">'+(r.type==='income'?'+':'-')+r.amount.toLocaleString()+' '+c2.symbol+'</div>'
     +'</div>'
     +'<div class="fg" style="margin-bottom:14px"><label class="fl">'+T('تاريخ المعاملة','Transaction Date')+'</label>'
@@ -2127,11 +2247,44 @@ function applyRecurring(){
     const exists=S.transactions.some(tx=>tx.date===date&&tx.desc===r.desc&&tx.amount===r.amount&&tx.recurring);
     if(!exists){S.transactions.unshift({id:Date.now()+Math.random(),type:r.type,amount:r.amount,desc:r.desc,cat:r.cat,date,recurring:true});added++;}
   });
+  S._lastAutoApplied = S.currentMonth;
   save();render();
   const c=cur();
   notify(added>0
     ? `✅ ${added} ${S.lang==='ar'?'معاملة أُضيفت':S.lang==='fr'?'transactions ajoutées':'transactions added'}`
     : (S.lang==='ar'?'ℹ️ جميعها مسجلة':S.lang==='fr'?'ℹ️ Tout déjà enregistré':'ℹ️ All already recorded'));
+}
+
+// Auto-apply recurring when entering a new month for the first time
+function checkRecurringAutoApply(){
+  if(!S.recurring||!S.recurring.length)return;
+  if(S._lastAutoApplied===S.currentMonth)return;
+  var nowYm=new Date().toISOString().slice(0,7);
+  if(S.currentMonth!==nowYm)return;
+  var unapplied=S.recurring.filter(function(r){
+    var d=S.currentMonth+'-'+String(r.day).padStart(2,'0');
+    return !S.transactions.some(function(tx){return tx.date===d&&tx.desc===r.desc&&tx.amount===r.amount&&tx.recurring;});
+  });
+  if(!unapplied.length){S._lastAutoApplied=S.currentMonth;save();return;}
+  var L=S.lang;
+  var T=function(ar,en,fr){return L==='ar'?ar:L==='fr'?fr:en;};
+  var existing=document.getElementById('rec-auto-banner');
+  if(existing)existing.remove();
+  var banner=document.createElement('div');
+  banner.id='rec-auto-banner';
+  banner.style.cssText='background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.05));border:1px solid var(--gold);border-radius:11px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px';
+  banner.innerHTML='<span style="font-size:20px">🔁</span>'
+    +'<div style="flex:1;font-size:12px;color:var(--text);line-height:1.6">'
+    +'<strong>'+T('شهر جديد!','New month!','Nouveau mois !')+'</strong> '
+    +T('لديك '+unapplied.length+' معاملة متكررة لم تُطبَّق على '+monthLabel(S.currentMonth),
+       'You have '+unapplied.length+' recurring transactions for '+monthLabel(S.currentMonth),
+       'Vous avez '+unapplied.length+' transactions récurrentes pour '+monthLabel(S.currentMonth))
+    +'</div>'
+    +'<button onclick="document.getElementById(\'rec-auto-banner\').remove();applyRecurring();" style="background:var(--gold);border:none;border-radius:8px;padding:7px 12px;color:#0b0f1a;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0">'+T('تطبيق','Apply','Appliquer')+'</button>'
+    +'<button onclick="S._lastAutoApplied=S.currentMonth;save();document.getElementById(\'rec-auto-banner\').remove();" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;flex-shrink:0">✕</button>';
+  var ovPage=document.getElementById('page-overview');
+  var sumGrid=ovPage?ovPage.querySelector('.sum-grid'):null;
+  if(sumGrid&&sumGrid.parentNode){sumGrid.parentNode.insertBefore(banner,sumGrid);}
 }
 function renderRecurring(){
   const ll=document.getElementById('rec-list');if(!ll)return;
@@ -2145,11 +2298,12 @@ function renderRecurring(){
     const date=`${y}-${m}-${day}`;
     const applied=S.transactions.some(tx=>tx.date===date&&tx.desc===r.desc&&tx.amount===r.amount&&tx.recurring);
     const applyLbl=S.lang==='ar'?(applied?'✅ مُسجَّلة':'⚡ تسجيل'):S.lang==='fr'?(applied?'✅ Enregistré':'⚡ Enregistrer'):(applied?'✅ Done':'⚡ Record');
+    const dCat=trCat(r.cat);
     return `<div class="rec-item">
-      <div class="rec-ico" style="background:${catColor(r.cat)}22">${r.cat.split(' ')[0]}</div>
+      <div class="rec-ico" style="background:${catColor(r.cat)}22">${(dCat||'').split(' ')[0]}</div>
       <div class="rec-inf">
         <div class="rec-nm">${r.desc}</div>
-        <div class="rec-meta">${r.cat} · ${S.lang==='ar'?'يوم':'Day'} ${r.day} · ${r.freq==='monthly'?t.monthly:t.yearly}</div>
+        <div class="rec-meta">${dCat} · ${S.lang==='ar'?'يوم':'Day'} ${r.day} · ${r.freq==='monthly'?t.monthly:t.yearly}</div>
         <span class="rec-badge ${isInc?'inc-b':'exp-b'}">${isInc?t.incOpt:t.expOpt}</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
@@ -2194,7 +2348,7 @@ function markPaid(id){
       +'<div style="font-size:14px;font-weight:700">🔔 '+r.name+'</div>'
       +'<div style="font-size:20px;font-weight:800;color:var(--red);margin-top:4px">-'+r.amount.toLocaleString()+' '+c2.symbol+'</div>'
       +'</div>'
-      var accOpts2=(S.accounts||[]).map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+a.name+'</option>';}).join('');
+      var accOpts2=(S.accounts||[]).map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>';}).join('');
     html+='<div class="fg" style="margin-bottom:14px"><label class="fl">'+T('تاريخ الدفع','Payment Date')+'</label>'
       +'<div id="rem-pay-date-disp" data-f="rem-pay-date" data-d="rem-pay-date-disp" onclick="calOpenInline(this.dataset.f,this.dataset.d)" style="background:var(--card2);border:1px solid var(--border2);border-radius:11px;padding:10px;text-align:center;font-size:14px;color:var(--text);cursor:pointer">'+defaultDate+'</div>'
       +'<input type="hidden" id="rem-pay-date" value="'+defaultDate+'"></div>'
@@ -2281,12 +2435,12 @@ function drawPie(){
   // Center hole
   ctx.beginPath();ctx.arc(100,100,42,0,Math.PI*2);ctx.fillStyle='#141c2e';ctx.fill();
   ctx.fillStyle='#e8eaf0';ctx.font='bold 12px IBM Plex Sans Arabic,Inter,sans-serif';ctx.textAlign='center';
-  ctx.fillText(cur().symbol,100,96);ctx.font='10px IBM Plex Sans Arabic,Inter,sans-serif';ctx.fillStyle='#7a8499';
+  ctx.fillText(cur().symbol.indexOf('<')>=0?cur().code:cur().symbol,100,96);ctx.font='10px IBM Plex Sans Arabic,Inter,sans-serif';ctx.fillStyle='#7a8499';
   ctx.fillText(total.toLocaleString(),100,112);
   // Legend
   const leg=document.getElementById('pie-legend');
   if(leg) leg.innerHTML=entries.slice(0,6).map(([cat,amt])=>`
-    <div class="leg-item"><div class="leg-dot" style="background:${catColor(cat)}"></div>${cat} · ${Math.round(amt/total*100)}%</div>`).join('');
+    <div class="leg-item"><div class="leg-dot" style="background:${catColor(cat)}"></div>${trCat(cat)} · ${Math.round(amt/total*100)}%</div>`).join('');
 }
 function drawBar(){
   const canvas=document.getElementById('bar-chart');if(!canvas)return;
@@ -2345,7 +2499,7 @@ function renderMonthCompare(){
     const diffTxt=diff!==null?(diff>0?`▲ ${diff}%`:`▼ ${Math.abs(diff)}%`):'';
     const diffColor=diff>0?'var(--red)':'var(--green)';
     return `<div class="cmp-row">
-      <div class="cmp-lbl">${cat.split(' ')[0]} ${cat.split(' ').slice(1).join(' ')}</div>
+      <div class="cmp-lbl">${(trCat(cat)||'').split(' ')[0]} ${(trCat(cat)||'').split(' ').slice(1).join(' ')}</div>
       <div class="cmp-bars">
         <div class="cmp-bar-row"><div class="cmp-bar-w"><div class="cmp-bar" style="width:${thisP}%;background:var(--gold)"></div></div><div class="cmp-num">${v.this.toLocaleString()} ${c.symbol}</div></div>
         <div class="cmp-bar-row"><div class="cmp-bar-w"><div class="cmp-bar" style="width:${prevP}%;background:rgba(201,168,76,.3)"></div></div><div class="cmp-num">${v.prev.toLocaleString()} ${c.symbol}</div></div>
@@ -2443,7 +2597,7 @@ function renderAI(txs,income,expenses,net,savRate){
     '<div class="cat-list">'+sorted.map(([cat,amt])=>{
       const p=income>0?Math.round(amt/income*100):0;
       const fl=p>30?'🔴':p>20?'🟡':'🟢';
-      return `<div><div class="cat-hdr"><span>${fl} ${cat}</span><span style="color:var(--muted)">${amt.toLocaleString()} ${c.symbol} · ${p}%</span></div><div class="cat-bar-w"><div class="cat-bar" style="width:${Math.round(amt/maxC*100)}%;background:${catColor(cat)}"></div></div></div>`;
+      return `<div><div class="cat-hdr"><span>${fl} ${trCat(cat)}</span><span style="color:var(--muted)">${amt.toLocaleString()} ${c.symbol} · ${p}%</span></div><div class="cat-bar-w"><div class="cat-bar" style="width:${Math.round(amt/maxC*100)}%;background:${catColor(cat)}"></div></div></div>`;
     }).join('')+'</div>');
   // Recommendations
   const recs=genRecs(txs,income,expenses,savRate);
@@ -2464,8 +2618,9 @@ function render(){
   if(S.targetIncome>0){var _ti=document.getElementById('target-income');if(_ti){_ti.value=S.targetIncome.toLocaleString();if(_ti.dataset)_ti.dataset.raw=String(S.targetIncome);}}
   const t=tr();const c=cur();
   const txs=monthTx();
-  const income=txs.filter(tx=>tx.type==='income').reduce((s,tx)=>s+tx.amount,0);
-  const expenses=txs.filter(tx=>tx.type==='expense').reduce((s,tx)=>s+tx.amount,0);
+  // Exclude transfers from income/expense totals (handles both new singular type==='transfer' and legacy paired isTransfer halves)
+  const income=txs.filter(tx=>tx.type==='income'&&!tx.isTransfer).reduce((s,tx)=>s+tx.amount,0);
+  const expenses=txs.filter(tx=>tx.type==='expense'&&!tx.isTransfer).reduce((s,tx)=>s+tx.amount,0);
   const net=income-expenses;
   const savRate=income>0?Math.round((net/income)*100):0;
   const totalDebt=S.debts.reduce((s,d)=>s+(parseFloat(d.principal||0)-parseFloat(d.principalPaid||0)),0);
@@ -2475,9 +2630,26 @@ function render(){
   inn('ov-expenses',expenses.toLocaleString()+' '+c.symbol);
   inn('ov-balance',net.toLocaleString()+' '+c.symbol);
   inn('ov-debt',totalDebt.toLocaleString()+' '+c.symbol);
+  // Net worth = account balances + goal savings - debts (handles transfers properly)
+  var _allTx=S.transactions||[];
+  var _totalAccBal=(S.accounts||[]).reduce(function(sum,acc){
+    var accInc=_allTx.filter(function(tx){return tx.accountId===acc.id&&tx.type==='income';}).reduce(function(s,t){return s+t.amount;},0);
+    var accExp=_allTx.filter(function(tx){return tx.accountId===acc.id&&tx.type==='expense';}).reduce(function(s,t){return s+t.amount;},0);
+    var accXferOut=_allTx.filter(function(tx){return tx.type==='transfer'&&tx.accountId===acc.id;}).reduce(function(s,t){return s+t.amount;},0);
+    var accXferIn =_allTx.filter(function(tx){return tx.type==='transfer'&&tx.transferTo===acc.id;}).reduce(function(s,t){return s+t.amount;},0);
+    return sum+(acc.balance||0)+accInc-accExp+accXferIn-accXferOut;
+  },0);
+  var _totalGoals=(S.goals||[]).reduce(function(sum,g){return sum+(g.saved||0);},0);
+  var _totalDebtBal=(S.debts||[]).reduce(function(sum,d){return sum+((d.principal||0)-(d.principalPaid||0));},0);
+  var _netWorth=_totalAccBal+_totalGoals-_totalDebtBal;
+  var _nwEl=document.getElementById('ov-networth');
+  if(_nwEl){
+    _nwEl.innerHTML=(Math.round(_netWorth)).toLocaleString()+' '+c.symbol;
+    _nwEl.style.color=_netWorth>=0?'var(--green)':'var(--red)';
+  }
   document.getElementById('ov-balance').className='s-val '+(net>=0?'g':'r');
-  inn('ov-inc-cnt',txs.filter(tx=>tx.type==='income').length+' '+t.txWord);
-  inn('ov-exp-cnt',txs.filter(tx=>tx.type==='expense').length+' '+t.txWord);
+  inn('ov-inc-cnt',txs.filter(tx=>tx.type==='income'&&!tx.isTransfer).length+' '+t.txWord);
+  inn('ov-exp-cnt',txs.filter(tx=>tx.type==='expense'&&!tx.isTransfer).length+' '+t.txWord);
   inn('ov-sav-rate',t.savRate+': '+savRate+'%');
   inn('ov-debt-sub',S.debts.length+' '+t.txWord);
 
@@ -2500,7 +2672,7 @@ function render(){
   const sortedCats=Object.entries(catExp).sort((a,b)=>b[1]-a[1]);const maxC=(sortedCats[0]&&sortedCats[0][1])||1;
   inn('ov-cat',sortedCats.length===0?`<div class="empty"><div class="empty-ico">📭</div>--</div>`:
     '<div class="cat-list">'+sortedCats.slice(0,5).map(([cat,amt])=>`
-      <div><div class="cat-hdr"><span>${cat}</span><span style="color:var(--muted)">${amt.toLocaleString()} ${c.symbol}</span></div>
+      <div><div class="cat-hdr"><span>${trCat(cat)}</span><span style="color:var(--muted)">${amt.toLocaleString()} ${c.symbol}</span></div>
       <div class="cat-bar-w"><div class="cat-bar" style="width:${pct(amt,maxC)}%;background:${catColor(cat)}"></div></div></div>`).join('')+'</div>');
 
   // Recent tx
@@ -2578,12 +2750,13 @@ function render(){
             ${fullSched.slice(showFrom,showTo).map(row=>{
               const isCurrent = row.period===cp+1;
               const isPaid    = row.period<=cp;
+              const _fmt = v => v<10 ? v.toFixed(2) : Math.round(v).toLocaleString();
               return `<div class="amort-row${isCurrent?' current':isPaid?' paid-row':''}">
                 <span>${row.period}</span>
-                <span>${Math.round(row.payment).toLocaleString()}</span>
-                <span class="aprin">${Math.round(row.principal).toLocaleString()}</span>
-                <span class="aint">${Math.round(row.interest).toLocaleString()}</span>
-                <span>${Math.round(row.balance).toLocaleString()}</span>
+                <span>${_fmt(row.payment)}</span>
+                <span class="aprin">${_fmt(row.principal)}</span>
+                <span class="aint">${_fmt(row.interest)}</span>
+                <span>${_fmt(row.balance)}</span>
               </div>`;
             }).join('')}
           </div>`;
@@ -2677,7 +2850,7 @@ function render(){
 
 // ============ NOTIFY ============
 function notify(msg){
-  const el=document.getElementById('notif');el.textContent=msg;el.classList.add('show');
+  const el=document.getElementById('notif');el.innerHTML=msg;el.classList.add('show');
   setTimeout(()=>el.classList.remove('show'),2200);
 }
 
@@ -2718,13 +2891,15 @@ function renderAccounts(){
   var txs=monthTx();
   if(al){
     al.innerHTML=S.accounts.map(function(acc){
-      var at=txs.filter(function(tx){return tx.accountId===acc.id;});
-      var inc=at.filter(function(tx){return tx.type==='income';}).reduce(function(s,tx){return s+tx.amount;},0);
-      var exp=at.filter(function(tx){return tx.type==='expense';}).reduce(function(s,tx){return s+tx.amount;},0);
-      var bal=(acc.balance||0)+inc-exp;
+      var at=txs.filter(function(tx){return tx.accountId===acc.id||(tx.type==='transfer'&&tx.transferTo===acc.id);});
+      var inc=at.filter(function(tx){return tx.type==='income'&&tx.accountId===acc.id;}).reduce(function(s,tx){return s+tx.amount;},0);
+      var exp=at.filter(function(tx){return tx.type==='expense'&&tx.accountId===acc.id;}).reduce(function(s,tx){return s+tx.amount;},0);
+      var xferOut=at.filter(function(tx){return tx.type==='transfer'&&tx.accountId===acc.id;}).reduce(function(s,tx){return s+tx.amount;},0);
+      var xferIn =at.filter(function(tx){return tx.type==='transfer'&&tx.transferTo===acc.id;}).reduce(function(s,tx){return s+tx.amount;},0);
+      var bal=(acc.balance||0)+inc-exp+xferIn-xferOut;
       return '<div style="background:var(--bg3);border:1px solid var(--border2);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:4px">'
         +'<div style="width:44px;height:44px;background:'+acc.color+'22;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">'+acc.icon+'</div>'
-        +'<div style="flex:1"><div style="font-size:15px;font-weight:700;color:var(--text)">'+acc.name+'</div>'
+        +'<div style="flex:1"><div style="font-size:15px;font-weight:700;color:var(--text)">'+trAccName(acc.name)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">'+at.length+' '+(L==='ar'?'معاملة':L==='fr'?'transactions':'transactions')+'</div></div>'
         +'<div><div style="font-size:16px;font-weight:800;color:'+(bal>=0?'var(--green)':'var(--red)')+'">'+( bal>=0?'+':'')+Math.round(bal).toLocaleString()+' '+c.symbol+'</div>'
         +'<div style="font-size:10px;color:var(--muted)">'+(L==='ar'?'الرصيد':L==='fr'?'Solde':'Balance')+'</div></div>'
@@ -2735,10 +2910,10 @@ function renderAccounts(){
     }).join('');
   }
   var sel=document.getElementById('tx-acc');
-  if(sel)sel.innerHTML=S.accounts.map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+a.name+'</option>';}).join('');
+  if(sel)sel.innerHTML=S.accounts.map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>';}).join('');
   if(as2){
-    var ti=txs.filter(function(t){return t.type==='income';}).reduce(function(s,t){return s+t.amount;},0);
-    var te=txs.filter(function(t){return t.type==='expense';}).reduce(function(s,t){return s+t.amount;},0);
+    var ti=txs.filter(function(t){return t.type==='income'&&!t.isTransfer;}).reduce(function(s,t){return s+t.amount;},0);
+    var te=txs.filter(function(t){return t.type==='expense'&&!t.isTransfer;}).reduce(function(s,t){return s+t.amount;},0);
     as2.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
       +'<div style="background:rgba(45,212,191,0.1);border:1px solid rgba(45,212,191,0.3);border-radius:12px;padding:14px;text-align:center"><div style="color:var(--green);font-size:18px;font-weight:800">'+ti.toLocaleString()+' '+c.symbol+'</div><div style="color:var(--muted);font-size:11px">'+(L==='ar'?'الدخل':L==='fr'?'Revenus':'Income')+'</div></div>'
       +'<div style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:14px;text-align:center"><div style="color:var(--red);font-size:18px;font-weight:800">'+te.toLocaleString()+' '+c.symbol+'</div><div style="color:var(--muted);font-size:11px">'+(L==='ar'?'المصروفات':L==='fr'?'Dépenses':'Expenses')+'</div></div>'
@@ -2986,6 +3161,7 @@ var remDateInit=document.getElementById('rem-date');if(remDateInit)remDateInit.v
   }catch(e){}
 })();
 applyLang();renderCatSelect();renderSysCards();render();
+setTimeout(function(){if(typeof checkRecurringAutoApply==='function')checkRecurringAutoApply();},800);
 _txNavMonth=S.currentMonth;setTimeout(function(){if(typeof renderTxList==='function')renderTxList();},100);
 </script>
 <script>
@@ -3393,6 +3569,8 @@ function calRender(){
   var firstDay=new Date(y,m,1).getDay();
   var daysInMonth=new Date(y,m+1,0).getDate();
   var todayStr=new Date().toISOString().slice(0,10);
+  // Block future dates only for transaction date fields
+  var blockFuture = (_calField==='tx-date' || _calField==='edit-tx-date');
   var html='';
   for(var i=0;i<firstDay;i++) html+='<div class="cal-day empty"></div>';
   for(var d2=1;d2<=daysInMonth;d2++){
@@ -3400,7 +3578,11 @@ function calRender(){
     var cls='cal-day';
     if(ym2===todayStr) cls+=' today';
     if(ym2===_calSel) cls+=' sel';
-    html+='<div class="'+cls+'" data-ym="'+ym2+'" onclick="calPick(this.dataset.ym)">'+d2+'</div>';
+    if(blockFuture && ym2>todayStr){
+      html+='<div class="cal-day empty" style="opacity:.3;cursor:not-allowed">'+d2+'</div>';
+    } else {
+      html+='<div class="'+cls+'" data-ym="'+ym2+'" onclick="calPick(this.dataset.ym)">'+d2+'</div>';
+    }
   }
   var daysEl=document.getElementById('cal-days');
   if(daysEl) daysEl.innerHTML=html;
@@ -3424,7 +3606,7 @@ function calPick(ym){
 // ═══════════════════════════════════════
 function updateAccSelectors(){
   if(!S.accounts||!S.accounts.length)return;
-  var opts=S.accounts.map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+a.name+'</option>';}).join('');
+  var opts=S.accounts.map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>';}).join('');
   ['goal-acc-sel','tx-acc','rec-acc-sel','tx-acc-to','fund-acc-sel'].forEach(function(id){
     var el=document.getElementById(id);
     if(el) el.innerHTML=opts;
@@ -3679,8 +3861,34 @@ function renderTxList(){
   var txList = _txShowAll
     ? S.transactions.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');})
     : S.transactions.filter(function(tx){return tx.date && tx.date.slice(0,7) === _txNavMonth;});
-  var inc = txList.filter(function(tx){return tx.type==='income';}).reduce(function(s,tx){return s+tx.amount;},0);
-  var exp = txList.filter(function(tx){return tx.type==='expense';}).reduce(function(s,tx){return s+tx.amount;},0);
+  // Apply search & filters
+  var qEl=document.getElementById('tx-search');
+  var tEl=document.getElementById('tx-filter-type');
+  var cEl=document.getElementById('tx-filter-cat');
+  var q=qEl?(qEl.value||'').trim().toLowerCase():'';
+  var ftype=tEl?tEl.value:'';
+  var fcat=cEl?cEl.value:'';
+  // Populate cat dropdown (preserve selection)
+  if(cEl){
+    var cats={}; S.transactions.forEach(function(tx){if(tx.cat)cats[tx.cat]=true;});
+    var catList=Object.keys(cats).sort();
+    var allCatLbl=S.lang==='ar'?'كل الفئات':S.lang==='fr'?'Toutes les catégories':'All categories';
+    cEl.innerHTML='<option value="" id="tx-filter-all-cat">'+allCatLbl+'</option>'
+      +catList.map(function(c){return '<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===fcat?' selected':'')+'>'+c+'</option>';}).join('');
+  }
+  if(q||ftype||fcat){
+    txList=txList.filter(function(tx){
+      if(ftype && tx.type!==ftype) return false;
+      if(fcat && tx.cat!==fcat) return false;
+      if(q){
+        var hay=((tx.desc||'')+' '+(tx.cat||'')+' '+(tx.amount||'')).toLowerCase();
+        if(hay.indexOf(q)<0) return false;
+      }
+      return true;
+    });
+  }
+  var inc = txList.filter(function(tx){return tx.type==='income'&&!tx.isTransfer;}).reduce(function(s,tx){return s+tx.amount;},0);
+  var exp = txList.filter(function(tx){return tx.type==='expense'&&!tx.isTransfer;}).reduce(function(s,tx){return s+tx.amount;},0);
   var sumEl = document.getElementById('tx-month-summary');
   if(sumEl){
     sumEl.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">'
@@ -3695,6 +3903,12 @@ function renderTxList(){
       ? txList.map(function(tx){return txCard(tx,true);}).join('')
       : '<div class="empty"><div class="empty-ico">📭</div></div>';
   }
+}
+
+function clearTxFilters(){
+  var ids=['tx-search','tx-filter-type','tx-filter-cat'];
+  ids.forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  renderTxList();
 }
 
 </script>
@@ -4092,7 +4306,7 @@ function calcGoalMonthly(){
   var existing = (S.goals || []).reduce(function(s,g){ return s + (g.saved||0); }, 0);
   var needed = Math.max(0, target - existing);
   var monthly = Math.ceil(needed / months);
-  reqEl.textContent = monthly.toLocaleString() + ' ' + cur().symbol + '/mo';
+  reqEl.innerHTML = monthly.toLocaleString() + ' ' + cur().symbol + '/mo';
 }
 
 // ═══ ACCOUNT TRANSFER ═══
@@ -4102,7 +4316,7 @@ function openTransferModal(){
     notify(T('⚠️ تحتاج حسابين على الأقل','⚠️ Need at least 2 accounts'));
     return;
   }
-  var opts = S.accounts.map(function(a){ return '<option value="'+a.id+'">'+a.icon+' '+a.name+'</option>'; }).join('');
+  var opts = S.accounts.map(function(a){ return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>'; }).join('');
   var c2 = cur();
   var html = '<div class="fg" style="margin-bottom:10px"><label class="fl">'+T('من حساب','From Account')+'</label>'
     +'<select class="fs" id="transfer-from">'+opts+'</select></div>'
@@ -4190,7 +4404,7 @@ function handleTxTypeChange(val){
   var toSel=document.getElementById('tx-acc-to');
   if(toSel&&fromSel&&val==='transfer'){
     var fromId=parseInt(fromSel.value);
-    toSel.innerHTML=(S.accounts||[]).filter(function(a){return a.id!==fromId;}).map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+a.name+'</option>';}).join('');
+    toSel.innerHTML=(S.accounts||[]).filter(function(a){return a.id!==fromId;}).map(function(a){return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>';}).join('');
   }
 }
 
@@ -4295,6 +4509,691 @@ function setDebtType(type){
   runSim();
 }
 </script>
+<!-- ═══ EDIT TRANSACTION MODAL ═══ -->
+<div id="edit-tx-modal" class="quick-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;align-items:flex-end;justify-content:center">
+  <div style="background:var(--card);border-radius:18px 18px 0 0;padding:20px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:700;color:var(--gold)" id="edit-tx-title">تعديل المعاملة</div>
+      <button onclick="closeEditTx()" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="fl" id="edit-lbl-type">النوع</label>
+      <select class="fs" id="edit-tx-type" onchange="handleEditTxTypeChange(this.value)">
+        <option value="income">💵 دخل</option>
+        <option value="expense">💸 مصروف</option>
+        <option value="transfer">🔄 تحويل</option>
+      </select>
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="fl" id="edit-lbl-amt">المبلغ</label>
+      <input class="fi" id="edit-tx-amt" type="text" readonly style="cursor:pointer;text-align:center;background:var(--card2)" onclick="npOpen('edit-tx-amt','edit-lbl-amt',false,'')">
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="fl" id="edit-lbl-desc">الوصف</label>
+      <input class="fi" id="edit-tx-desc" type="text">
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="fl" id="edit-lbl-cat">الفئة</label>
+      <select class="fs" id="edit-tx-cat"></select>
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="fl" id="edit-lbl-date">التاريخ</label>
+      <input class="fi" id="edit-tx-date" type="text" readonly style="cursor:pointer;text-align:center" onclick="calOpen('edit-tx-date')">
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="fl" id="edit-lbl-acc">الحساب</label>
+      <select class="fs" id="edit-tx-acc" onchange="updateEditTransferAcc()"></select>
+    </div>
+    <div id="edit-tx-to-row" style="display:none;margin-bottom:10px">
+      <label class="fl" id="edit-lbl-acc-to">إلى حساب</label>
+      <select class="fs" id="edit-tx-acc-to"></select>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+      <button onclick="closeEditTx()" style="padding:12px;border-radius:11px;border:1px solid var(--border2);background:var(--card2);color:var(--text);cursor:pointer;font-family:inherit;font-size:13px">إلغاء</button>
+      <button onclick="saveEditTx()" style="padding:12px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b0f1a;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700">💾 حفظ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// EDIT TRANSACTION
+// ══════════════════════════════════════════════
+var _editTxId = null;
+
+function openEditTx(id){
+  var tx = S.transactions.find(function(t){return t.id===id;});
+  if(!tx) return;
+  _editTxId = id;
+  var L = S.lang;
+  document.getElementById('edit-tx-title').textContent = L==='ar'?'تعديل المعاملة':L==='fr'?'Modifier':'Edit Transaction';
+  var typeEl = document.getElementById('edit-tx-type');
+  typeEl.value = tx.type||'expense';
+  var amtEl = document.getElementById('edit-tx-amt');
+  amtEl.value = tx.amount?tx.amount.toLocaleString():'0';
+  amtEl.dataset.raw = tx.amount||0;
+  document.getElementById('edit-tx-desc').value = tx.desc||'';
+  var catEl = document.getElementById('edit-tx-cat');
+  var cats = tr().cats;
+  var dCat = trCat(tx.cat);
+  catEl.innerHTML = cats.map(function(cat){
+    return '<option value="'+cat+'"'+(cat===dCat?' selected':'')+'>'+cat+'</option>';
+  }).join('');
+  document.getElementById('edit-tx-date').value = tx.date||new Date().toISOString().slice(0,10);
+  var accEl = document.getElementById('edit-tx-acc');
+  accEl.innerHTML = (S.accounts||[]).map(function(a){
+    return '<option value="'+a.id+'"'+(a.id===tx.accountId?' selected':'')+'>'+a.icon+' '+trAccName(a.name)+'</option>';
+  }).join('');
+  var toRow=document.getElementById('edit-tx-to-row');
+  if(toRow) toRow.style.display=tx.type==='transfer'?'block':'none';
+  var toAccEl=document.getElementById('edit-tx-acc-to');
+  if(toAccEl){
+    var fromId=parseInt(accEl.value)||0;
+    toAccEl.innerHTML=(S.accounts||[]).filter(function(a){return a.id!==fromId;}).map(function(a){
+      return '<option value="'+a.id+'"'+(a.id===tx.transferTo?' selected':'')+'>'+a.icon+' '+trAccName(a.name)+'</option>';
+    }).join('');
+  }
+  document.getElementById('edit-tx-modal').style.display='flex';
+  document.getElementById('edit-lbl-type').textContent=L==='ar'?'النوع':L==='fr'?'Type':'Type';
+  document.getElementById('edit-lbl-amt').textContent=L==='ar'?'المبلغ':L==='fr'?'Montant':'Amount';
+  document.getElementById('edit-lbl-desc').textContent=L==='ar'?'الوصف':L==='fr'?'Description':'Description';
+  document.getElementById('edit-lbl-cat').textContent=L==='ar'?'الفئة':L==='fr'?'Catégorie':'Category';
+  document.getElementById('edit-lbl-date').textContent=L==='ar'?'التاريخ':L==='fr'?'Date':'Date';
+  document.getElementById('edit-lbl-acc').textContent=tx.type==='transfer'?(L==='ar'?'من حساب':L==='fr'?'Du compte':'From Account'):(L==='ar'?'الحساب':L==='fr'?'Compte':'Account');
+  document.getElementById('edit-lbl-acc-to').textContent=L==='ar'?'إلى حساب':L==='fr'?'Vers compte':'To Account';
+}
+
+function closeEditTx(){
+  document.getElementById('edit-tx-modal').style.display='none';
+  _editTxId=null;
+}
+
+function handleEditTxTypeChange(val){
+  var toRow=document.getElementById('edit-tx-to-row');
+  var fromLbl=document.getElementById('edit-lbl-acc');
+  var L=S.lang;
+  if(toRow) toRow.style.display=val==='transfer'?'block':'none';
+  if(fromLbl) fromLbl.textContent=val==='transfer'?(L==='ar'?'من حساب':L==='fr'?'Du compte':'From Account'):(L==='ar'?'الحساب':L==='fr'?'Compte':'Account');
+  updateEditTransferAcc();
+}
+function updateEditTransferAcc(){
+  var fromSel=document.getElementById('edit-tx-acc');
+  var toSel=document.getElementById('edit-tx-acc-to');
+  if(!toSel||!fromSel) return;
+  var fromId=parseInt(fromSel.value);
+  toSel.innerHTML=(S.accounts||[]).filter(function(a){return a.id!==fromId;}).map(function(a){
+    return '<option value="'+a.id+'">'+a.icon+' '+trAccName(a.name)+'</option>';
+  }).join('');
+}
+
+function saveEditTx(){
+  if(!_editTxId) return;
+  var idx = S.transactions.findIndex(function(t){return t.id===_editTxId;});
+  if(idx<0) return;
+  var amtRaw = document.getElementById('edit-tx-amt').dataset.raw;
+  var amount = parseFloat(amtRaw||document.getElementById('edit-tx-amt').value.replace(/,/g,'')||'0');
+  if(!amount||amount<=0){
+    notify(S.lang==='ar'?'⚠️ أدخل مبلغاً صحيحاً':'⚠️ Enter a valid amount');
+    return;
+  }
+  var desc = document.getElementById('edit-tx-desc').value.trim();
+  if(!desc){notify(S.lang==='ar'?'⚠️ أدخل وصفاً':'⚠️ Enter a description');return;}
+  var editDate=document.getElementById('edit-tx-date').value;
+  var today=new Date().toISOString().slice(0,10);
+  if(editDate&&editDate>today){notify(S.lang==='ar'?'⚠️ لا يمكن إدخال معاملة بتاريخ مستقبلي':'⚠️ Future dates not allowed for transactions');return;}
+  var _newType=document.getElementById('edit-tx-type').value;
+  var _newAccId=parseInt(document.getElementById('edit-tx-acc').value)||0;
+  var _patch={
+    type:_newType,
+    amount:amount,
+    desc:desc,
+    cat:document.getElementById('edit-tx-cat').value,
+    date:editDate,
+    accountId:_newAccId,
+  };
+  if(_newType==='transfer'){
+    var _toEl=document.getElementById('edit-tx-acc-to');
+    var _toId=_toEl?parseInt(_toEl.value)||0:0;
+    if(!_toId||_toId===_newAccId){notify(S.lang==='ar'?'⚠️ اختر حسابين مختلفين':'⚠️ Choose different accounts');return;}
+    _patch.transferTo=_toId;
+    _patch.isTransfer=true;
+  } else {
+    _patch.transferTo=null;
+    _patch.isTransfer=false;
+  }
+  S.transactions[idx]=Object.assign({},S.transactions[idx],_patch);
+  save();render();if(typeof renderTxList==='function')renderTxList();
+  // Redraw analysis charts if visible
+  var _anPage=document.getElementById('page-analysis');
+  if(_anPage&&_anPage.classList.contains('active')){setTimeout(function(){if(typeof drawCharts==='function')drawCharts();},50);}
+  closeEditTx();
+  notify(S.lang==='ar'?'✅ تم تعديل المعاملة':'✅ Transaction updated');
+}
+
+document.getElementById('edit-tx-modal').addEventListener('click', function(e){
+  if(e.target===this) closeEditTx();
+});
+</script>
+
+
+<!-- ═══ NET WORTH SNAPSHOTS + CHART ═══ -->
+<script>
+(function(){
+  // Compute net worth as of a specific year-month (inclusive)
+  function netWorthAsOf(ym){
+    var allTx=(S.transactions||[]).filter(function(tx){return tx.date&&tx.date<=ym+'-31';});
+    var accBal=(S.accounts||[]).reduce(function(sum,acc){
+      var inc=allTx.filter(function(tx){return tx.accountId===acc.id&&tx.type==='income';}).reduce(function(s,t){return s+t.amount;},0);
+      var exp=allTx.filter(function(tx){return tx.accountId===acc.id&&tx.type==='expense';}).reduce(function(s,t){return s+t.amount;},0);
+      var xOut=allTx.filter(function(tx){return tx.type==='transfer'&&tx.accountId===acc.id;}).reduce(function(s,t){return s+t.amount;},0);
+      var xIn =allTx.filter(function(tx){return tx.type==='transfer'&&tx.transferTo===acc.id;}).reduce(function(s,t){return s+t.amount;},0);
+      return sum+(acc.balance||0)+inc-exp+xIn-xOut;
+    },0);
+    var goals=(S.goals||[]).reduce(function(s,g){return s+(g.saved||0);},0);
+    // For debts: approximate principal paid as of period (use full current value — simple approximation)
+    var debts=(S.debts||[]).reduce(function(s,d){return s+((d.principal||0)-(d.principalPaid||0));},0);
+    return accBal+goals-debts;
+  }
+
+  // Build historical snapshots from existing data, retroactively
+  window.buildNwHistory=function(){
+    if(!S.nwHistory)S.nwHistory={};
+    if(!S.transactions||!S.transactions.length)return;
+    // Find earliest transaction month
+    var months=S.transactions.map(function(t){return (t.date||'').slice(0,7);}).filter(Boolean).sort();
+    if(!months.length)return;
+    var first=months[0];
+    var nowYm=new Date().toISOString().slice(0,7);
+    // Walk forward month by month
+    var p=first.split('-');
+    var y=parseInt(p[0]),m=parseInt(p[1]);
+    var nowP=nowYm.split('-');
+    var ny=parseInt(nowP[0]),nm=parseInt(nowP[1]);
+    var safety=0;
+    while((y<ny||(y===ny&&m<=nm))&&safety<240){
+      var ym=y+'-'+String(m).padStart(2,'0');
+      // Only set if missing (don't overwrite real saved snapshots)
+      if(S.nwHistory[ym]===undefined){
+        S.nwHistory[ym]=Math.round(netWorthAsOf(ym));
+      }
+      m++;if(m>12){m=1;y++;}
+      safety++;
+    }
+    save();
+  };
+
+  // Snapshot current net worth — called at end of render
+  window.snapshotNetWorth=function(nw){
+    if(!S.nwHistory)S.nwHistory={};
+    var ym=new Date().toISOString().slice(0,7);
+    if(S.nwHistory[ym]===Math.round(nw))return;
+    S.nwHistory[ym]=Math.round(nw);
+    // Avoid extra save() call (caller already saves)
+  };
+
+  // Chart range state
+  window._nwRange=6;
+  window.setNwRange=function(n){
+    window._nwRange=n;
+    ['6','12','all'].forEach(function(k){
+      var b=document.getElementById('nw-range-'+k);
+      if(!b)return;
+      var active=(k==='6'&&n===6)||(k==='12'&&n===12)||(k==='all'&&n===0);
+      b.style.background=active?'rgba(201,168,76,.2)':'var(--card2)';
+      b.style.borderColor=active?'var(--gold)':'var(--border2)';
+      b.style.color=active?'var(--gold)':'var(--muted)';
+      b.style.fontWeight=active?'700':'400';
+    });
+    drawNwChart();
+  };
+
+  window.drawNwChart=function(){
+    var card=document.getElementById('nw-chart-card');
+    var canvas=document.getElementById('nw-canvas');
+    if(!card||!canvas)return;
+    if(!S.nwHistory||!Object.keys(S.nwHistory).length){card.style.display='none';return;}
+    var keys=Object.keys(S.nwHistory).sort();
+    if(keys.length<2){card.style.display='none';return;} // need at least 2 points
+    card.style.display='block';
+    var range=window._nwRange||6;
+    if(range>0&&keys.length>range)keys=keys.slice(-range);
+    var values=keys.map(function(k){return S.nwHistory[k];});
+    var c=cur();var L=S.lang;
+    var T=function(ar,en,fr){return L==='ar'?ar:L==='fr'?fr:en;};
+    // Setup canvas
+    var dpr=window.devicePixelRatio||1;
+    var W=canvas.offsetWidth||600;
+    var H=180;
+    canvas.width=W*dpr;canvas.height=H*dpr;
+    canvas.style.height=H+'px';
+    var ctx=canvas.getContext('2d');
+    ctx.scale(dpr,dpr);
+    ctx.clearRect(0,0,W,H);
+    var pad={t:14,b:24,l:8,r:10};
+    var gW=W-pad.l-pad.r, gH=H-pad.t-pad.b;
+    // Auto-scale Y: include zero if all positive or all negative, otherwise use min/max
+    var minV=Math.min.apply(null,values);
+    var maxV=Math.max.apply(null,values);
+    var yMin=minV<0?minV:Math.min(0,minV);
+    var yMax=maxV>0?maxV:0;
+    if(yMin===yMax){yMin-=100;yMax+=100;}
+    var yRange=yMax-yMin;
+    // Grid lines (4)
+    ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;
+    ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='9px IBM Plex Sans Arabic,Inter,sans-serif';
+    ctx.textAlign=L==='ar'?'right':'left';
+    for(var g=0;g<=4;g++){
+      var gy=pad.t+gH*(g/4);
+      ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(W-pad.r,gy);ctx.stroke();
+    }
+    // Zero line if scale crosses zero
+    if(yMin<0&&yMax>0){
+      var zy=pad.t+gH*(yMax/yRange);
+      ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1;
+      ctx.setLineDash([3,3]);
+      ctx.beginPath();ctx.moveTo(pad.l,zy);ctx.lineTo(W-pad.r,zy);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    // Plot
+    var step=keys.length>1?gW/(keys.length-1):0;
+    var pts=values.map(function(v,i){
+      return {x:pad.l+i*step, y:pad.t+gH*((yMax-v)/yRange)};
+    });
+    var isPositive=values[values.length-1]>=0;
+    var lineColor=isPositive?'#2dd4bf':'#f87171';
+    var fillStart=isPositive?'rgba(45,212,191,.3)':'rgba(248,113,113,.3)';
+    // Gradient fill under line
+    var grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+    grad.addColorStop(0,fillStart);
+    grad.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();
+    pts.forEach(function(p,i){if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);});
+    ctx.lineTo(pts[pts.length-1].x,H-pad.b);
+    ctx.lineTo(pts[0].x,H-pad.b);
+    ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+    // Line
+    ctx.beginPath();ctx.strokeStyle=lineColor;ctx.lineWidth=2.5;ctx.lineJoin='round';
+    pts.forEach(function(p,i){if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);});
+    ctx.stroke();
+    // Dots
+    ctx.fillStyle=lineColor;
+    pts.forEach(function(p){ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,Math.PI*2);ctx.fill();});
+    // X-axis labels (first, middle, last only)
+    ctx.fillStyle='rgba(255,255,255,.45)';ctx.font='9px IBM Plex Sans Arabic,Inter,sans-serif';ctx.textAlign='center';
+    function shortMonth(ym){
+      var p=ym.split('-');
+      var months=tr().months||['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return months[parseInt(p[1])-1].slice(0,3)+' '+p[0].slice(2);
+    }
+    var iLabels=keys.length>=3?[0,Math.floor(keys.length/2),keys.length-1]:[0,keys.length-1];
+    iLabels.forEach(function(i){
+      var px=pad.l+i*step;
+      ctx.fillText(shortMonth(keys[i]),px,H-8);
+    });
+    // Summary line
+    var first=values[0],last=values[values.length-1];
+    var change=last-first;
+    var changePct=first!==0?Math.round((change/Math.abs(first))*100):0;
+    var changeColor=change>=0?'var(--green)':'var(--red)';
+    var changeArrow=change>=0?'▲':'▼';
+    var sumEl=document.getElementById('nw-summary');
+    if(sumEl){
+      sumEl.innerHTML='<span>'+T('البداية','Start','Début')+': <strong style="color:var(--text)">'+first.toLocaleString()+' '+c.symbol+'</strong></span>'
+        +'<span>'+T('الآن','Now','Maintenant')+': <strong style="color:var(--text)">'+last.toLocaleString()+' '+c.symbol+'</strong></span>'
+        +'<span style="color:'+changeColor+'">'+changeArrow+' '+Math.abs(change).toLocaleString()+' '+c.symbol+' ('+(change>=0?'+':'')+changePct+'%)</span>';
+    }
+  };
+
+  // Hook into render: snapshot + redraw after every render() call
+  if(typeof render==='function'){
+    var _origRender=window.render;
+    window.render=function(){
+      _origRender.apply(this,arguments);
+      try{
+        // Recompute current net worth (matches render's calc) and snapshot
+        var allTx=S.transactions||[];
+        var accBal=(S.accounts||[]).reduce(function(sum,acc){
+          var inc=allTx.filter(function(tx){return tx.accountId===acc.id&&tx.type==='income';}).reduce(function(s,t){return s+t.amount;},0);
+          var exp=allTx.filter(function(tx){return tx.accountId===acc.id&&tx.type==='expense';}).reduce(function(s,t){return s+t.amount;},0);
+          var xOut=allTx.filter(function(tx){return tx.type==='transfer'&&tx.accountId===acc.id;}).reduce(function(s,t){return s+t.amount;},0);
+          var xIn =allTx.filter(function(tx){return tx.type==='transfer'&&tx.transferTo===acc.id;}).reduce(function(s,t){return s+t.amount;},0);
+          return sum+(acc.balance||0)+inc-exp+xIn-xOut;
+        },0);
+        var goals=(S.goals||[]).reduce(function(s,g){return s+(g.saved||0);},0);
+        var debts=(S.debts||[]).reduce(function(s,d){return s+((d.principal||0)-(d.principalPaid||0));},0);
+        var nw=accBal+goals-debts;
+        if(typeof snapshotNetWorth==='function')snapshotNetWorth(nw);
+        if(typeof drawNwChart==='function')drawNwChart();
+      }catch(e){}
+    };
+  }
+
+  // Translate label on language switch
+  if(typeof applyLang==='function'){
+    var _origApply2=window.applyLang;
+    window.applyLang=function(){
+      _origApply2.apply(this,arguments);
+      var L=S.lang;
+      var sl=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+      sl('lbl-nw-chart',L==='ar'?'تطور صافي الثروة':L==='fr'?'Évolution du Patrimoine':'Net Worth Trend');
+      var allBtn=document.getElementById('nw-range-all');
+      if(allBtn)allBtn.textContent=L==='ar'?'الكل':L==='fr'?'Tout':'All';
+    };
+  }
+
+  // First-run: build retroactive history from existing data
+  setTimeout(function(){
+    if(typeof buildNwHistory==='function')buildNwHistory();
+    if(typeof drawNwChart==='function')drawNwChart();
+  },1200);
+})();
+</script>
+
+<!-- ═══ DEBT SNOWBALL vs AVALANCHE COMPARATOR ═══ -->
+<script>
+(function(){
+  // Simulate paying off a list of debts using a given strategy
+  // strategy: 'snowball' (smallest balance first) | 'avalanche' (highest rate first)
+  // extraPmt: extra dollars per month, applied to the priority debt
+  // Returns: {months, totalInterest, totalPaid, order: [debtIds...]}
+  function simulate(debts, strategy, extraPmt){
+    // Deep-copy to avoid mutating real data
+    var queue=debts.map(function(d){
+      return {
+        id:d.id, name:d.name,
+        balance:Math.max(0,(d.principal||0)-(d.principalPaid||0)),
+        annualRate:d.annualRate||0,
+        minPmt:d.monthlyPayment||0,
+        interestType:d.interestType||'reducing'
+      };
+    }).filter(function(d){return d.balance>0&&d.minPmt>0;});
+    if(queue.length===0)return null;
+    var totalInterest=0, months=0, totalPaid=0;
+    var paidOrder=[];
+    var safety=0;
+    while(queue.length>0&&safety<600){
+      // Sort by strategy each month (after a debt is cleared, priority shifts)
+      queue.sort(function(a,b){
+        if(strategy==='snowball')return a.balance-b.balance;
+        return b.annualRate-a.annualRate; // avalanche
+      });
+      // Apply minimum payment + accrue interest on each debt
+      var extraLeft=extraPmt;
+      queue.forEach(function(d,idx){
+        if(d.balance<=0)return;
+        var monthlyInt;
+        if(d.interestType==='flat'){
+          // Flat: interest fixed on original principal — but for simulation we approximate by treating as if balance accrues at same rate
+          monthlyInt = d.balance * (d.annualRate/100/12);
+        } else {
+          monthlyInt = d.balance * (d.annualRate/100/12);
+        }
+        var pay=d.minPmt;
+        if(idx===0)pay+=extraLeft; // priority debt gets all extra
+        // Don't overpay
+        var maxPay=d.balance+monthlyInt;
+        if(pay>maxPay)pay=maxPay;
+        var principalPaid=pay-monthlyInt;
+        if(principalPaid<0){
+          // Min payment can't even cover interest — debt grows; safety guard
+          d.balance+=Math.abs(principalPaid);
+          totalInterest+=monthlyInt;
+          totalPaid+=pay;
+        } else {
+          d.balance-=principalPaid;
+          totalInterest+=monthlyInt;
+          totalPaid+=pay;
+          if(d.balance<0.5){d.balance=0;}
+        }
+      });
+      // Remove cleared debts (and roll their min payment into extra)
+      var cleared=queue.filter(function(d){return d.balance<=0;});
+      cleared.forEach(function(d){
+        paidOrder.push({id:d.id,name:d.name,month:months+1});
+        extraPmt+=d.minPmt; // snowball effect: cleared debt's payment rolls forward
+      });
+      queue=queue.filter(function(d){return d.balance>0;});
+      months++;
+      safety++;
+    }
+    return {months:months,totalInterest:totalInterest,totalPaid:totalPaid,order:paidOrder};
+  }
+
+  window.compareDebtStrategies=function(){
+    var card=document.getElementById('debt-strategy-card');
+    var resultEl=document.getElementById('debt-strategy-result');
+    if(!card||!resultEl)return;
+    var debts=(S.debts||[]).filter(function(d){return ((d.principal||0)-(d.principalPaid||0))>0;});
+    if(debts.length<2){card.style.display='none';return;}
+    card.style.display='block';
+    var extraEl=document.getElementById('debt-extra-pmt');
+    var extra=extraEl?parseFloat(extraEl.dataset.raw||extraEl.value||'0')||0:0;
+    var snow=simulate(debts,'snowball',extra);
+    var aval=simulate(debts,'avalanche',extra);
+    if(!snow||!aval){resultEl.innerHTML='';return;}
+    var c=cur();var L=S.lang;
+    var T=function(ar,en,fr){return L==='ar'?ar:L==='fr'?fr:en;};
+    var fmt=function(v){return Math.round(v).toLocaleString()+' '+c.symbol;};
+    function durationLabel(m){
+      var y=Math.floor(m/12),mo=m%12;
+      var parts=[];
+      if(y>0)parts.push(y+' '+T('سنة','yr','an'));
+      if(mo>0)parts.push(mo+' '+T('شهر','mo','mois'));
+      return parts.join(' ')||'0 '+T('شهر','mo','mois');
+    }
+    // Determine winner by total interest
+    var savings=Math.abs(snow.totalInterest-aval.totalInterest);
+    var savingsMonths=Math.abs(snow.months-aval.months);
+    var winner=aval.totalInterest<snow.totalInterest?'avalanche':snow.totalInterest<aval.totalInterest?'snowball':'tie';
+    function strategyCard(label,emoji,desc,sim,isWinner){
+      return '<div style="background:'+(isWinner?'rgba(45,212,191,.08)':'var(--bg3)')+';border:1px solid '+(isWinner?'var(--green)':'var(--border2)')+';border-radius:12px;padding:14px;position:relative">'
+        +(isWinner?'<div style="position:absolute;top:-8px;'+(L==='ar'?'left':'right')+':10px;background:var(--green);color:#0b0f1a;font-size:10px;font-weight:800;padding:3px 9px;border-radius:99px">★ '+T('الأفضل','BEST','MEILLEUR')+'</div>':'')
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'
+        +'<span style="font-size:22px">'+emoji+'</span>'
+        +'<div><div style="font-weight:700;font-size:13px;color:var(--text)">'+label+'</div>'
+        +'<div style="font-size:10px;color:var(--muted)">'+desc+'</div></div></div>'
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
+        +'<div style="background:var(--bg2);border-radius:8px;padding:8px;text-align:center">'
+        +'<div style="font-size:14px;font-weight:800;color:var(--gold)">'+durationLabel(sim.months)+'</div>'
+        +'<div style="font-size:9px;color:var(--muted);margin-top:2px">'+T('المدة','Duration','Durée')+'</div></div>'
+        +'<div style="background:var(--bg2);border-radius:8px;padding:8px;text-align:center">'
+        +'<div style="font-size:14px;font-weight:800;color:var(--red)">'+fmt(sim.totalInterest)+'</div>'
+        +'<div style="font-size:9px;color:var(--muted);margin-top:2px">'+T('إجمالي الفائدة','Interest','Intérêts')+'</div></div></div>'
+        +'<div style="font-size:10px;color:var(--muted);line-height:1.7">'
+        +'<strong style="color:var(--text)">'+T('ترتيب السداد:','Payoff order:','Ordre :')+'</strong> '
+        +sim.order.map(function(p,i){return (i+1)+'. '+p.name;}).join(' → ')
+        +'</div></div>';
+    }
+    var html='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">'
+      +strategyCard(
+        T('الكرة الثلجية','Snowball','Boule de Neige'),'⛄',
+        T('سدد الأصغر أولاً (نفسي)','Smallest first (motivation)','Plus petit d\'abord'),
+        snow,winner==='snowball')
+      +strategyCard(
+        T('الانهيار','Avalanche','Avalanche'),'🏔️',
+        T('سدد الأعلى فائدة (رياضي)','Highest rate first (math)','Taux le plus élevé'),
+        aval,winner==='avalanche')
+      +'</div>';
+    if(winner!=='tie'){
+      html+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:12px;font-size:12px;line-height:1.7">'
+        +'💡 <strong>'+T('التوصية: ','Recommendation: ','Recommandation : ')+'</strong>'
+        +T(
+          'بطريقة '+(winner==='avalanche'?'الانهيار':'الكرة الثلجية')+' ستوفر <strong style="color:var(--green)">'+fmt(savings)+'</strong> من الفائدة'+(savingsMonths>0?' وتنتهي قبل '+savingsMonths+' '+(savingsMonths===1?'شهر':'شهراً'):'')+'.',
+          'Use the <strong>'+(winner==='avalanche'?'avalanche':'snowball')+'</strong> method to save <strong style="color:var(--green)">'+fmt(savings)+'</strong> in interest'+(savingsMonths>0?' and finish '+savingsMonths+' months sooner':'')+'.',
+          'La méthode <strong>'+(winner==='avalanche'?'avalanche':'boule de neige')+'</strong> économise <strong style="color:var(--green)">'+fmt(savings)+'</strong> d\'intérêts'+(savingsMonths>0?' et termine '+savingsMonths+' mois plus tôt':'')+'.'
+        )
+        +'</div>';
+    }
+    resultEl.innerHTML=html;
+  };
+
+  // Hook into render so the comparison auto-updates when debts change
+  if(typeof render==='function'){
+    var _origR=window.render;
+    window.render=function(){
+      _origR.apply(this,arguments);
+      try{if(typeof compareDebtStrategies==='function')compareDebtStrategies();}catch(e){}
+    };
+  }
+
+  // Translate labels on language switch
+  if(typeof applyLang==='function'){
+    var _origA=window.applyLang;
+    window.applyLang=function(){
+      _origA.apply(this,arguments);
+      var L=S.lang;
+      var sl=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+      sl('lbl-debt-strat',L==='ar'?'استراتيجية سداد الديون':L==='fr'?'Stratégie de Remboursement':'Debt Payoff Strategy');
+      sl('lbl-debt-strat-desc',
+        L==='ar'?'قارن بين طريقتي سداد الديون عند توفر مبلغ إضافي شهرياً. اختر الأنسب لك.':
+        L==='fr'?'Comparez deux méthodes de remboursement avec un montant supplémentaire mensuel.':
+        'Compare two debt payoff methods given an extra monthly amount.');
+      sl('lbl-debt-extra',L==='ar'?'💰 المبلغ الإضافي الشهري (فوق الحد الأدنى)':L==='fr'?'💰 Montant supplémentaire mensuel':'💰 Extra Monthly Payment (above minimum)');
+    };
+  }
+})();
+</script>
+
+<!-- ═══ PUSH NOTIFICATIONS FOR REMINDERS ═══ -->
+<script>
+(function(){
+  function L(){return S.lang;}
+  function T(ar,en,fr){return L()==='ar'?ar:L()==='fr'?fr:en;}
+
+  function isSupported(){
+    return 'Notification' in window;
+  }
+
+  function updateToggleUI(){
+    var btn=document.getElementById('notif-toggle-btn');
+    var ico=document.getElementById('notif-toggle-ico');
+    var lbl=document.getElementById('notif-toggle-lbl');
+    if(!btn)return;
+    if(!isSupported()){
+      btn.style.display='none';
+      return;
+    }
+    var perm=Notification.permission;
+    if(perm==='granted'){
+      btn.style.background='rgba(45,212,191,.1)';
+      btn.style.borderColor='rgba(45,212,191,.4)';
+      btn.style.color='var(--green)';
+      if(ico)ico.textContent='🔔';
+      if(lbl)lbl.textContent=T('الإشعارات مفعّلة','Notifications on','Notifications activées');
+    } else if(perm==='denied'){
+      btn.style.background='rgba(248,113,113,.08)';
+      btn.style.borderColor='rgba(248,113,113,.3)';
+      btn.style.color='var(--red)';
+      if(ico)ico.textContent='🔕';
+      if(lbl)lbl.textContent=T('محظورة (راجع إعدادات المتصفح)','Blocked (check browser)','Bloquées');
+    } else {
+      btn.style.background='var(--card2)';
+      btn.style.borderColor='var(--border2)';
+      btn.style.color='var(--muted)';
+      if(ico)ico.textContent='🔕';
+      if(lbl)lbl.textContent=T('تفعيل الإشعارات','Enable Notifications','Activer Notifications');
+    }
+  }
+
+  window.toggleNotifs=function(){
+    if(!isSupported()){
+      notify(T('⚠️ متصفحك لا يدعم الإشعارات','⚠️ Browser doesn\'t support notifications','⚠️ Navigateur non supporté'));
+      return;
+    }
+    if(Notification.permission==='granted'){
+      // Already on — show test notification
+      try{
+        new Notification('Mali ✅', {
+          body: T('الإشعارات تعمل بشكل صحيح!','Notifications are working!','Les notifications fonctionnent !'),
+          icon: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23c9a84c"/><text x="50" y="65" font-size="50" text-anchor="middle" fill="white">💰</text></svg>'
+        });
+        notify('🔔 '+T('تم إرسال إشعار تجريبي','Test notification sent','Notification de test envoyée'));
+      }catch(e){
+        notify(T('⚠️ خطأ في الإشعار','⚠️ Notification error','⚠️ Erreur'));
+      }
+      return;
+    }
+    if(Notification.permission==='denied'){
+      notify(T('⚠️ الإشعارات محظورة. فعّلها من إعدادات المتصفح','⚠️ Blocked — enable in browser settings','⚠️ Bloquées — activez dans les paramètres'));
+      return;
+    }
+    Notification.requestPermission().then(function(perm){
+      updateToggleUI();
+      if(perm==='granted'){
+        notify('✅ '+T('تم تفعيل الإشعارات','Notifications enabled','Notifications activées'));
+        // Send welcome
+        try{
+          new Notification('Mali 🔔', {
+            body: T('سنذكّرك بالفواتير المستحقة','We\'ll remind you of due bills','Nous vous rappellerons les factures')
+          });
+        }catch(e){}
+        // Check for any reminders that need firing right now
+        setTimeout(checkReminders,500);
+      }
+    });
+  };
+
+  // Check reminders, fire notifications for those due today or tomorrow
+  function checkReminders(){
+    if(!isSupported()||Notification.permission!=='granted')return;
+    if(!S.reminders||!S.reminders.length)return;
+    var today=new Date();
+    var todayDay=today.getDate();
+    var todayKey=today.toISOString().slice(0,10);
+    // Track which reminders we already notified about today (avoid spam on every render)
+    if(!S._notifLog)S._notifLog={};
+    S.reminders.forEach(function(r){
+      if(r.paid)return;
+      var diff=r.day-todayDay;
+      if(diff<0){
+        // Already in next month's range
+        diff+=new Date(today.getFullYear(),today.getMonth()+1,0).getDate();
+      }
+      // Notify for: due today (diff===0), tomorrow (diff===1), or 3 days away
+      if(diff===0||diff===1||diff===3){
+        var key=r.id+'_'+todayKey+'_'+diff;
+        if(S._notifLog[key])return;
+        S._notifLog[key]=Date.now();
+        var c=cur();
+        var amtTxt=r.amount>0?' ('+r.amount.toLocaleString()+' '+c.symbol+')':'';
+        var when=diff===0?T('اليوم','today','aujourd\'hui'):diff===1?T('غداً','tomorrow','demain'):T('بعد 3 أيام','in 3 days','dans 3 jours');
+        try{
+          var n=new Notification('🔔 Mali — '+T('تذكير','Reminder','Rappel'), {
+            body: r.name+amtTxt+' — '+T('مستحق','due','dû')+' '+when,
+            tag: 'mali-rem-'+r.id+'-'+diff,
+            requireInteraction: false
+          });
+          n.onclick=function(){window.focus();n.close();};
+        }catch(e){}
+      }
+    });
+    // Cleanup notification log entries older than 7 days
+    var cutoff=Date.now()-7*86400000;
+    Object.keys(S._notifLog).forEach(function(k){
+      if(S._notifLog[k]<cutoff)delete S._notifLog[k];
+    });
+    save();
+  }
+
+  // Run check once on load, then daily
+  setTimeout(function(){
+    updateToggleUI();
+    checkReminders();
+  },2000);
+  // Re-check every 6 hours while page is open
+  setInterval(checkReminders,6*60*60*1000);
+
+  // Refresh UI on language change
+  if(typeof applyLang==='function'){
+    var _origAp=window.applyLang;
+    window.applyLang=function(){
+      _origAp.apply(this,arguments);
+      updateToggleUI();
+    };
+  }
+})();
+</script>
+
 </body>
 </html
 <!-- FOOTER -->
