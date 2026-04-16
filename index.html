@@ -5055,6 +5055,10 @@ document.getElementById('edit-tx-modal').addEventListener('click', function(e){
     var snow=simulate(debts,'snowball',extra);
     var aval=simulate(debts,'avalanche',extra);
     if(!snow||!aval){resultEl.innerHTML='';return;}
+    // Baseline: same strategy (avalanche, most common), but with extra=0.
+    // This lets us show the user the actual benefit of accelerating payments,
+    // separate from the strategy-choice diff.
+    var baseline=simulate(debts,'avalanche',0);
     var c=cur();var L=S.lang;
     var T=function(ar,en,fr){return L==='ar'?ar:L==='fr'?fr:en;};
     var fmt=function(v){return Math.round(v).toLocaleString()+' '+c.symbol;};
@@ -5098,13 +5102,28 @@ document.getElementById('edit-tx-modal').addEventListener('click', function(e){
         T('سدد الأعلى فائدة (رياضي)','Highest rate first (math)','Taux le plus élevé'),
         aval,winner==='avalanche')
       +'</div>';
+    // Acceleration savings: how much does the extra payment save vs. paying just minimums?
+    // Compares the winner strategy's total interest to the baseline (no extra, same strategy).
+    var winnerSim = snow.totalInterest <= aval.totalInterest ? snow : aval;
+    var accelSavings = baseline ? Math.max(0, baseline.totalInterest - winnerSim.totalInterest) : 0;
+    var accelMonths = baseline ? Math.max(0, baseline.months - winnerSim.months) : 0;
+    if(extra>0 && accelSavings>0.5){
+      html+='<div style="background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.3);border-radius:10px;padding:12px;font-size:12px;line-height:1.7;margin-bottom:10px">'
+        +'🚀 <strong>'+T('أثر الدفعة الإضافية: ','Acceleration impact: ','Impact de l\'accélération : ')+'</strong>'
+        +T(
+          'بدفع <strong>'+fmt(extra)+'</strong> إضافي شهرياً، ستوفر <strong style="color:var(--green)">'+fmt(accelSavings)+'</strong> من إجمالي الفائدة'+(accelMonths>0?' وتنتهي قبل '+accelMonths+' '+(accelMonths===1?'شهر':'شهراً'):'')+' (مقارنةً بدفع الحد الأدنى فقط).',
+          'Paying an extra <strong>'+fmt(extra)+'</strong>/mo saves <strong style="color:var(--green)">'+fmt(accelSavings)+'</strong> in total interest'+(accelMonths>0?' and finishes '+accelMonths+' months sooner':'')+' (vs. minimum payments only).',
+          'Payer <strong>'+fmt(extra)+'</strong>/mois en plus économise <strong style="color:var(--green)">'+fmt(accelSavings)+'</strong> d\'intérêts'+(accelMonths>0?' et termine '+accelMonths+' mois plus tôt':'')+' (vs. paiements minimums).'
+        )
+        +'</div>';
+    }
     if(winner!=='tie'){
       html+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:12px;font-size:12px;line-height:1.7">'
-        +'💡 <strong>'+T('التوصية: ','Recommendation: ','Recommandation : ')+'</strong>'
+        +'💡 <strong>'+T('اختيار الاستراتيجية: ','Strategy choice: ','Choix de stratégie : ')+'</strong>'
         +T(
-          'بطريقة '+(winner==='avalanche'?'الانهيار':'الكرة الثلجية')+' ستوفر <strong style="color:var(--green)">'+fmt(savings)+'</strong> من الفائدة'+(savingsMonths>0?' وتنتهي قبل '+savingsMonths+' '+(savingsMonths===1?'شهر':'شهراً'):'')+'.',
-          'Use the <strong>'+(winner==='avalanche'?'avalanche':'snowball')+'</strong> method to save <strong style="color:var(--green)">'+fmt(savings)+'</strong> in interest'+(savingsMonths>0?' and finish '+savingsMonths+' months sooner':'')+'.',
-          'La méthode <strong>'+(winner==='avalanche'?'avalanche':'boule de neige')+'</strong> économise <strong style="color:var(--green)">'+fmt(savings)+'</strong> d\'intérêts'+(savingsMonths>0?' et termine '+savingsMonths+' mois plus tôt':'')+'.'
+          'بطريقة '+(winner==='avalanche'?'الانهيار':'الكرة الثلجية')+' توفر <strong style="color:var(--green)">'+fmt(savings)+'</strong> إضافية من الفائدة'+(savingsMonths>0?' وتنتهي قبل '+savingsMonths+' '+(savingsMonths===1?'شهر':'شهراً'):'')+' مقارنةً بالطريقة الأخرى.',
+          'The <strong>'+(winner==='avalanche'?'avalanche':'snowball')+'</strong> method saves an additional <strong style="color:var(--green)">'+fmt(savings)+'</strong> in interest'+(savingsMonths>0?' and finishes '+savingsMonths+' months sooner':'')+' vs. the other method.',
+          'La méthode <strong>'+(winner==='avalanche'?'avalanche':'boule de neige')+'</strong> économise <strong style="color:var(--green)">'+fmt(savings)+'</strong> supplémentaires'+(savingsMonths>0?' et termine '+savingsMonths+' mois plus tôt':'')+' vs. l\'autre méthode.'
         )
         +'</div>';
     }
